@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Entity combatant_1 = new Warrior(75, 45, 10);
         Entity combatant_2 = new Warrior(90, 35, 15);
+        Entity combatant_mage = new Mage(50, 70, 5, 100);
 
         battle(combatant_1, combatant_2);
     }
