@@ -2,10 +2,10 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Entity combatant_1 = new Warrior(75, 45, 10);
-        Entity combatant_2 = new Warrior(90, 35, 15);
+        Entity good = new Entity(75, 45, 10);
+        Entity evil = new Entity(90, 35, 15);
 
-        battle(combatant_1, combatant_2);
+        battle(good, evil);
     }
 
     private static void battle(Entity good, Entity evil) {
