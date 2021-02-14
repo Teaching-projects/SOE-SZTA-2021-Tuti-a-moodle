@@ -14,8 +14,8 @@ public class Entity {
     }
 
     private void setHealth(double health) {
-        if (health < 0 || health > 100) {
-            throw new IllegalArgumentException("Health is outside the valid range");
+        if (health < 0) {
+            throw new IllegalArgumentException("Health must not be negative");
         }
 
         this.health = health;
