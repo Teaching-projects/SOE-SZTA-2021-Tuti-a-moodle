@@ -35,6 +35,9 @@ public class Entity {
 
     public void attack(Entity other) {
         double damage = getAttack() - other.getDefense();
+
+        // if damage is a negative number, then the code below would cause the
+        // other entity to be healed after an attack
         if (damage <= 0) {
             return;
         }
