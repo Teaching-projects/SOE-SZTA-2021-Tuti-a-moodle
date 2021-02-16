@@ -4,7 +4,11 @@ public class Entity {
     private final double defense;
 
     public Entity(double health, double attack, double defense) {
-        this.setHealth(health);
+        if (health < 0) {
+            throw new IllegalArgumentException("Health must not be negative");
+        }
+
+        this.health = health;
         this.attack = attack;
         this.defense = defense;
     }
@@ -14,10 +18,6 @@ public class Entity {
     }
 
     private void setHealth(double health) {
-        if (health < 0) {
-            throw new IllegalArgumentException("Health must not be negative");
-        }
-
         this.health = health;
     }
 
