@@ -18,7 +18,7 @@ public class Entity {
     }
 
     private void setHealth(double health) {
-        this.health = health;
+        this.health = Math.max(0.0, health);
     }
 
     public boolean isAlive() {
@@ -42,7 +42,6 @@ public class Entity {
             return;
         }
 
-        double newHealth = other.getHealth() - damage;
-        other.setHealth(newHealth < 0 ? 0 : newHealth);
+        other.setHealth(other.getHealth() - damage);
     }
 }
