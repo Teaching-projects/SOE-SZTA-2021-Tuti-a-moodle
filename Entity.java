@@ -1,7 +1,7 @@
 public class Entity {
     private double health;
-    private double attack;
-    private double defense;
+    private final double attack;
+    private final double defense;
 
     public Entity(double health, double attack, double defense) {
         this.setHealth(health);
