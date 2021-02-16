@@ -34,15 +34,12 @@ public class Entity {
     }
 
     public void attack(Entity other) {
-        var enemyHealth = other.getHealth();
-        var enemyDefense = other.getDefense();
-        var ownAttack = getAttack();
-
-        var damage = ownAttack - enemyDefense;
+        double damage = getAttack() - other.getDefense();
         if (damage <= 0) {
             return;
         }
-        var newHealth = enemyHealth - damage;
+
+        double newHealth = other.getHealth() - damage;
         other.setHealth(newHealth < 0 ? 0 : newHealth);
     }
 }
