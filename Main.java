@@ -1,11 +1,14 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Entity good = new Entity(75, 45, 10);
         Entity evil = new Entity(90, 35, 15);
 
-        battle(good, evil);
+        System.out.println(readDouble("HP: "));
+        printEntity("Good", good);
+        // battle(good, evil);
     }
 
     private static void battle(Entity good, Entity evil) {
@@ -42,5 +45,28 @@ public class Main {
         System.out.println("The Battle is over.");
         String result = good.isAlive() ? "The Good won!" : "The Evil won!";
         System.out.println(result);
+    }
+
+    static void printEntity(String name, Entity entity) {
+        System.out.println(name + " - HP: " + entity.getHealth() + ", ATK: " + entity.getAttack() + ", DEF: "
+                + entity.getDefense());
+    }
+
+    static double readDouble(String msg) {
+        Scanner in = new Scanner(System.in);
+        boolean b = true;
+        String valueString;
+        double value = 0;
+        do {
+            System.out.print(msg);
+            valueString = in.nextLine();
+            try {
+                value = Double.parseDouble(valueString);
+                b = false;
+            } catch (Exception ex) {
+                System.err.println("Please enter number or use \".\" instead of \",\"!");
+            }
+        } while (b);
+        return value;
     }
 }
