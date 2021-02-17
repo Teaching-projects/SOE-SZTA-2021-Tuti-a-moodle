@@ -3,21 +3,28 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Entity good = new Entity(75, 45, 10);
-        Entity evil = new Entity(90, 35, 15);
+        double goodHealth = readDouble("Please give the health of the good entity: ");
+        double goodAttack = readDouble("Please give the attack of the good entity: ");
+        double goodDefense = readDouble("Please give the defense of the good entity: ");
 
-        System.out.println(readDouble("HP: "));
-        printEntity("Good", good);
-        // battle(good, evil);
+        double evilHealth = readDouble("Please give the health of the good entity: ");
+        double evilAttack = readDouble("Please give the attack of the good entity: ");
+        double evilDefense = readDouble("Please give the defense of the good entity: ");
+
+        Entity good = new Entity(goodHealth, goodAttack, goodDefense);
+        Entity evil = new Entity(evilHealth, evilAttack, evilDefense);
+
+      
+        battle(good, evil);
     }
 
     private static void battle(Entity good, Entity evil) {
         Random rand = new Random();
         int i = 1;
-        System.out.println(
-                "Good - HP: " + good.getHealth() + ", ATK: " + good.getAttack() + ", DEF: " + good.getDefense());
-        System.out.println(
-                "Evil - HP: " + evil.getHealth() + ", ATK: " + evil.getAttack() + ", DEF: " + evil.getDefense());
+
+        printEntity("good", good);
+        printEntity("evil", evil);
+
         System.out.println("====================");
         System.out.println("The Battle begins.");
         while (good.isAlive() && evil.isAlive()) {
@@ -48,7 +55,7 @@ public class Main {
     }
 
     static void printEntity(String name, Entity entity) {
-        System.out.println(name + " - HP: " + entity.getHealth() + ", ATK: " + entity.getAttack() + ", DEF: "
+        System.out.println(name + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack() + ", DEF: "
                 + entity.getDefense());
     }
 
