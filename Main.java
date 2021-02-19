@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -14,49 +13,8 @@ public class Main {
         Entity good = new Entity(goodHealth, goodAttack, goodDefense);
         Entity evil = new Entity(evilHealth, evilAttack, evilDefense);
 
-      
-        battle(good, evil);
-    }
-
-    private static void battle(Entity good, Entity evil) {
-        Random rand = new Random();
-        int i = 1;
-
-        printEntity("good", good);
-        printEntity("evil", evil);
-
-        System.out.println("====================");
-        System.out.println("The Battle begins.");
-        while (good.isAlive() && evil.isAlive()) {
-            System.out.println("********************");
-            System.out.println(i + ". round:");
-            if (rand.nextBoolean()) {
-                System.out.println("Good attacks first.");
-                good.attack(evil);
-                if (evil.isAlive()) {
-                    evil.attack(good);
-                }
-            } else {
-                System.out.println("Evil attacks first.");
-                evil.attack(good);
-                if (good.isAlive()) {
-                    good.attack(evil);
-                }
-            }
-            i++;
-            System.out.println("********************");
-            System.out.println("Good - HP: " + good.getHealth());
-            System.out.println("Evil - HP: " + evil.getHealth());
-        }
-        System.out.println("====================");
-        System.out.println("The Battle is over.");
-        String result = good.isAlive() ? "The Good won!" : "The Evil won!";
-        System.out.println(result);
-    }
-
-    static void printEntity(String name, Entity entity) {
-        System.out.println(name + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack() + ", DEF: "
-                + entity.getDefense());
+        Battle bt = new Battle("Good", good, "Evil", evil);
+        bt.battle();
     }
 
     static double readDouble(String msg) {
