@@ -23,6 +23,10 @@ public class Battle {
 
         printLineOf('=', 20);
 
+        if (preTest()) {
+            return;
+        }
+
         printMessage("The Battle begins.");
 
         while (player1.isAlive() && player2.isAlive()) {
@@ -55,6 +59,25 @@ public class Battle {
 
         String result = player1.isAlive() ? player1Name : player2Name;
         printMessage(result + " won!");
+    }
+
+    private boolean preTest() {
+        if (player1.getAttack() <= player2.getDefense() && player2.getAttack() <= player1.getDefense()) {
+            printMessage("Unbalanced combat!");
+            printMessage("Draw!");
+            return true;
+        }
+        if (player2.getAttack() <= player1.getDefense()) {
+            printMessage("Unbalanced combat!");
+            printMessage(player1Name + " won!");
+            return true;
+        }
+        if (player1.getAttack() <= player2.getDefense()) {
+            printMessage("Unbalanced combat!");
+            printMessage(player2Name + " won!");
+            return true;
+        }
+        return false;
     }
 
     private void printEntity(String name, Entity entity) {
