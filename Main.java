@@ -23,16 +23,14 @@ public class Main {
 
     static double readDouble(Scanner scanner, String msg) {
         boolean b = true;
-        String valueString;
         double value = 0;
         do {
             System.out.print(msg);
-            valueString = scanner.nextLine();
-            try {
-                value = Double.parseDouble(valueString);
+            if (scanner.hasNextFloat()) {
+                value = scanner.nextFloat();
                 b = false;
-            } catch (Exception ex) {
-                System.err.println("Please enter number or use \".\" instead of \",\"!");
+            } else {
+                System.out.println(scanner.next() + " is not an acceptable type. ");
             }
         } while (b);
         return value;
