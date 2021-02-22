@@ -12,10 +12,10 @@ public class Main {
         double evilAttack = readDouble(in, "Enter the attack of the evil entity: ");
         double evilDefense = readDouble(in, "Enter the defense of the evil entity: ");
 
-        Entity good = new Entity(goodHealth, goodAttack, goodDefense);
-        Entity evil = new Entity(evilHealth, evilAttack, evilDefense);
+        Entity good = new Entity(goodHealth, goodAttack, goodDefense, "Tim");
+        Entity evil = new Entity(evilHealth, evilAttack, evilDefense, "Honks");
 
-        Battle bt = new Battle("Good", good, "Evil", evil);
+        Battle bt = new Battle(good.getName(), good, evil.getName(), evil);
         bt.battle();
 
         in.close();

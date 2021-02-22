@@ -2,8 +2,9 @@ public class Entity {
     private double health;
     private final double attack;
     private final double defense;
+    private final String name;
 
-    public Entity(double health, double attack, double defense) {
+    public Entity(double health, double attack, double defense, String name) {
         if (health < 0) {
             throw new IllegalArgumentException("Health must not be negative");
         }
@@ -11,6 +12,7 @@ public class Entity {
         this.health = health;
         this.attack = attack;
         this.defense = defense;
+        this.name = name;
     }
 
     public double getHealth() {
@@ -40,5 +42,9 @@ public class Entity {
         if (damage > 0) {
             other.setHealth(other.getHealth() - damage);
         }
+    }
+
+    public String getName() {
+        return name;
     }
 }

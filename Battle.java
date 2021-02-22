@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class Battle {
     private final Entity player1;
@@ -55,13 +55,11 @@ public class Battle {
             printMessage("Unbalanced combat!");
             printMessage("Draw!");
             return true;
-        }
-        if (player2.getAttack() <= player1.getDefense()) {
+        } else if (player2.getAttack() <= player1.getDefense()) {
             printMessage("Unbalanced combat!");
             printMessage(player1Name + " won!");
             return true;
-        }
-        if (player1.getAttack() <= player2.getDefense()) {
+        } else if (player1.getAttack() <= player2.getDefense()) {
             printMessage("Unbalanced combat!");
             printMessage(player2Name + " won!");
             return true;
