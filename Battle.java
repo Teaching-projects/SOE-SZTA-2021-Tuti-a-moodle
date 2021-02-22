@@ -14,7 +14,6 @@ public class Battle {
     }
 
     public void battle() {
-        Random rand = new Random();
         int i = 1;
 
         printLineOf('=', 20);
@@ -34,24 +33,14 @@ public class Battle {
             printLineOf('*', 20);
             printMessage(i + ". round:");
 
-            if (rand.nextBoolean()) {
-                printMessage(player1Name + " attacks first.");
-                player1.attack(player2);
-                if (player2.isAlive()) {
-                    player2.attack(player1);
-                }
-            } else {
-                printMessage(player2Name + " attacks first.");
-                player2.attack(player1);
-                if (player1.isAlive()) {
-                    player1.attack(player2);
-                }
-            }
+            printMessage(player1Name + " and " + player2Name + " clash!");
+            player1.attack(player2);
+            healthCheck();
+            player2.attack(player1);
 
             i++;
             printLineOf('*', 20);
-            printEntityHP(player1Name, player1);
-            printEntityHP(player2Name, player2);
+            healthCheck();
         }
 
         printLineOf('=', 20);
@@ -98,5 +87,10 @@ public class Battle {
 
     private void printMessage(String message) {
         System.out.println(message);
+    }
+
+    private void healthCheck() {
+        printEntityHP(player1Name, player1);
+        printEntityHP(player2Name, player2);
     }
 }
