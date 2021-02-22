@@ -1,13 +1,6 @@
 public class Battle {
-    private final Entity player1;
-    private final Entity player2;
 
-    public Battle(Entity player1, Entity player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-    }
-
-    public void battle() {
+    public static void battle(Entity player1, Entity player2) {
         int i = 1;
 
         printSeparator('=', 20);
@@ -16,7 +9,7 @@ public class Battle {
 
         printSeparator('=', 20);
 
-        if (preTest()) {
+        if (preTest(player1, player2)) {
             return;
         }
 
@@ -29,12 +22,12 @@ public class Battle {
             printMessage(i + ". round:");
 
             player1.attack(player2);
-            healthCheck();
+            healthCheck(player1, player2);
 
             if (player2.isAlive()) {
                 printSeparator('*', 20);
                 player2.attack(player1);
-                healthCheck();
+                healthCheck(player1, player2);
             }
             i++;
         }
@@ -46,7 +39,7 @@ public class Battle {
         printMessage(result + " won!");
     }
 
-    private boolean preTest() {
+    private static boolean preTest(Entity player1, Entity player2) {
         if (player1.getAttack() <= player2.getDefense() && player2.getAttack() <= player1.getDefense()) {
             printMessage("There wouldn\'t be damage in combat!");
             return true;
@@ -62,27 +55,27 @@ public class Battle {
         return false;
     }
 
-    private void printEntity(Entity entity) {
+    private static void printEntity(Entity entity) {
         System.out.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
                 + ", DEF: " + entity.getDefense());
     }
 
-    private void printEntityHP(Entity entity) {
+    private static void printEntityHP(Entity entity) {
         System.out.println(entity.getName() + " - HP: " + entity.getHealth());
     }
 
-    private void printSeparator(char character, int length) {
+    private static void printSeparator(char character, int length) {
         for (int i = 0; i < length; i++) {
             System.out.print(character);
         }
         System.out.println();
     }
 
-    private void printMessage(String message) {
+    private static void printMessage(String message) {
         System.out.println(message);
     }
 
-    private void healthCheck() {
+    private static void healthCheck(Entity player1, Entity player2) {
         printEntityHP(player1);
         printEntityHP(player2);
     }
