@@ -15,7 +15,7 @@ public class Main {
         Entity good = new Entity(goodHealth, goodAttack, goodDefense, "Tim");
         Entity evil = new Entity(evilHealth, evilAttack, evilDefense, "Honks");
 
-        Battle bt = new Battle(good.getName(), good, evil.getName(), evil);
+        Battle bt = new Battle(good, evil);
         bt.battle();
 
         in.close();
