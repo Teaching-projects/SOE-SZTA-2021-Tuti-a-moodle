@@ -5,10 +5,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: javac *.java
-    Run_Basic_IO_Tests:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: action/checkout@v2
-        - run: javac *.java
-        - run: java Main < test1.txt
-        - run: java Main < test2.txt
+  Run_Basic_IO_Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v2
+      - run: javac *.java
+      - run: java Main < test1.txt
+      - run: java Main < test2.txt
