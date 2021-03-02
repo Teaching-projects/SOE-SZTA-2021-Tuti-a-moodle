@@ -1,23 +1,50 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        Entity one;
+        Entity two;
+        switch (args.length) {
+            case 0:
+                try (Scanner in = new Scanner(System.in)) {
+                    one = readEntity(in);
+                    System.out.println();
+                    two = readEntity(in);
+                }
+                break;
+            case 2: {
+                var objectMapper = new ObjectMapper();
+                one = objectMapper.readValue(new File(args[0]), Entity.class);
+                two = objectMapper.readValue(new File(args[1]), Entity.class);
+                break;
+            }
+            default:
+                System.err.println("Invalid number of arguments");
+                System.exit(1);
+                return;
+        }
 
-        double goodHealth = readDouble(in, "Enter the health of the good entity: ");
-        double goodAttack = readDouble(in, "Enter the attack of the good entity: ");
-        double goodDefense = readDouble(in, "Enter the defense of the good entity: ");
+        Battle bt = new Battle(one.getName(), one, two.getName(), two);
+        bt.battle();
+    }
 
-        double evilHealth = readDouble(in, "Enter the health of the evil entity: ");
-        double evilAttack = readDouble(in, "Enter the attack of the evil entity: ");
-        double evilDefense = readDouble(in, "Enter the defense of the evil entity: ");
-
-        Entity good = new Entity(goodHealth, goodAttack, goodDefense, "Tim");
-        Entity evil = new Entity(evilHealth, evilAttack, evilDefense, "Honks");
-
-        Battle.battle(good, evil);
-
-        in.close();
+    static Entity readEntity(Scanner in) {
+        System.out.print("Enter the name of the entity: ");
+        String name = in.nextLine();
+        System.out.print("Enter the lore of " + name + ": ");
+        String lore = in.nextLine();
+        return new Entity(
+            readDouble(in, "Enter the health of " + name + ": "),
+            readDouble(in, "Enter the attack of " + name + ": "),
+            readDouble(in, "Enter the defense of " + name + ": "),
+            readDouble(in, "Enter the cooldown of " + name + ": "),
+            name,
+            lore
+        );
     }
 
     static double readDouble(Scanner scanner, String msg) {
