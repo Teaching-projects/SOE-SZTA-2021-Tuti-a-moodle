@@ -1,3 +1,6 @@
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = EntityBuilder.class)
 public class Entity {
     private double health;
     private final double attack;
