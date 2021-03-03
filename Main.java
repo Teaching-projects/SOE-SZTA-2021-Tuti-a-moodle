@@ -1,46 +1,37 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Entity good = new Entity(75, 45, 10);
-        Entity evil = new Entity(90, 35, 15);
+        Scanner in = new Scanner(System.in);
 
-        battle(good, evil);
+        double goodHealth = readDouble(in, "Enter the health of the good entity: ");
+        double goodAttack = readDouble(in, "Enter the attack of the good entity: ");
+        double goodDefense = readDouble(in, "Enter the defense of the good entity: ");
+
+        double evilHealth = readDouble(in, "Enter the health of the evil entity: ");
+        double evilAttack = readDouble(in, "Enter the attack of the evil entity: ");
+        double evilDefense = readDouble(in, "Enter the defense of the evil entity: ");
+
+        Entity good = new Entity(goodHealth, goodAttack, goodDefense, "Tim");
+        Entity evil = new Entity(evilHealth, evilAttack, evilDefense, "Honks");
+
+        Battle.battle(good, evil);
+
+        in.close();
     }
 
-    private static void battle(Entity good, Entity evil) {
-        Random rand = new Random();
-        int i = 1;
-        System.out.println(
-                "Good - HP: " + good.getHealth() + ", ATK: " + good.getAttack() + ", DEF: " + good.getDefense());
-        System.out.println(
-                "Evil - HP: " + evil.getHealth() + ", ATK: " + evil.getAttack() + ", DEF: " + evil.getDefense());
-        System.out.println("====================");
-        System.out.println("The Battle begins.");
-        while (good.isAlive() && evil.isAlive()) {
-            System.out.println("********************");
-            System.out.println(i + ". round:");
-            if (rand.nextBoolean()) {
-                System.out.println("Good attacks first.");
-                good.attack(evil);
-                if (evil.isAlive()) {
-                    evil.attack(good);
-                }
+    static double readDouble(Scanner scanner, String msg) {
+        boolean b = true;
+        double value = 0;
+        do {
+            System.out.print(msg);
+            if (scanner.hasNextFloat()) {
+                value = scanner.nextFloat();
+                b = false;
             } else {
-                System.out.println("Evil attacks first.");
-                evil.attack(good);
-                if (good.isAlive()) {
-                    good.attack(evil);
-                }
+                System.out.println(scanner.next() + " is not an acceptable type. ");
             }
-            i++;
-            System.out.println("********************");
-            System.out.println("Good - HP: " + good.getHealth());
-            System.out.println("Evil - HP: " + evil.getHealth());
-        }
-        System.out.println("====================");
-        System.out.println("The Battle is over.");
-        String result = good.isAlive() ? "The Good won!" : "The Evil won!";
-        System.out.println(result);
+        } while (b);
+        return value;
     }
 }
