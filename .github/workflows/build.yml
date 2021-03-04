@@ -13,3 +13,5 @@ jobs:
       - run: java Main < test1.txt
       - run: java Main < test2.txt
       - run: java Main < test3.txt
+      - run: java Main < test4.txt
+      - run: java Main < test5.txt
