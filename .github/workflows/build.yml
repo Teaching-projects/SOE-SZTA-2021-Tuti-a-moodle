@@ -16,3 +16,4 @@ jobs:
       - run: java Main < test4.txt
       - run: java Main < test5.txt
       - run: java Main < test6.txt
+      - run: java Main < test7.txt
