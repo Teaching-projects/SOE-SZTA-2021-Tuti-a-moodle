@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Entity one;
-        Entity two;
+        final Entity one;
+        final Entity two;
         switch (args.length) {
             case 0:
                 try (Scanner in = new Scanner(System.in)) {
