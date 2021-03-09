@@ -8,6 +8,7 @@ public class Entity {
     private final double cooldown;
     private final String name;
     private final String lore;
+    private double activeCooldown = 0;
 
     public Entity(
         double health,
@@ -68,5 +69,13 @@ public class Entity {
         if (damage > 0) {
             other.setHealth(other.getHealth() - damage);
         }
+    }
+
+    public void setActiveCooldown(double activeCooldown) {
+        this.activeCooldown = activeCooldown;
+    }
+
+    public double getActiveCooldown() {
+        return activeCooldown;
     }
 }
