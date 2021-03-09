@@ -28,8 +28,7 @@ public class Main {
                 return;
         }
 
-        Battle bt = new Battle(one.getName(), one, two.getName(), two);
-        bt.battle();
+        Battle.battle(one, two);
     }
 
     static Entity readEntity(Scanner in) {
