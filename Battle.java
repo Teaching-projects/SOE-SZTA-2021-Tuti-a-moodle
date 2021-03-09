@@ -1,7 +1,6 @@
 public class Battle {
 
     public static void battle(Entity player1, Entity player2) {
-        int i = 1;
 
         printSeparator('=', 20);
         printEntity(player1);
@@ -16,27 +15,30 @@ public class Battle {
         printMessage("The Battle begins.");
         printMessage(player1.getName() + " and " + player2.getName() + " clash!");
 
-        while (player1.isAlive() && player2.isAlive()) {
+        player1.setActiveCooldown(0);
+        player2.setActiveCooldown(0);
 
-            printSeparator('*', 20);
-            printMessage(i + ". round:");
-
-            player1.attack(player2);
-            healthCheck(player1, player2);
-
-            if (player2.isAlive()) {
-                printSeparator('*', 20);
-                player2.attack(player1);
-                healthCheck(player1, player2);
+        do {
+            double minCooldown = Math.min(player1.getActiveCooldown(), player2.getActiveCooldown());
+            player1.setActiveCooldown(player1.getActiveCooldown() - minCooldown);
+            player2.setActiveCooldown(player2.getActiveCooldown() - minCooldown);
+            if (player1.getActiveCooldown() == 0) {
+                player1.attack(player2);
             }
-            i++;
-        }
+            if (player2.getActiveCooldown() == 0) {
+                player2.attack(player1);
+            }
+        } while(player1.isAlive() && player2.isAlive());
 
         printSeparator('=', 20);
         printMessage("The Battle is over.");
 
-        String result = player1.isAlive() ? player1.getName() : player2.getName();
-        printMessage(result + " won!");
+        if (!player1.isAlive() && !player2.isAlive()) {
+            printMessage("Both heroes are dead!");
+        } else {
+            String result = player1.isAlive() ? player1.getName() : player2.getName();
+            printMessage(result + " won!");
+        }
     }
 
     private static boolean preTest(Entity player1, Entity player2) {
