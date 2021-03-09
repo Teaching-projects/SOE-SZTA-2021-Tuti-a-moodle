@@ -69,6 +69,8 @@ public class Entity {
         if (damage > 0) {
             other.setHealth(other.getHealth() - damage);
         }
+
+        setActiveCooldown(getCooldown());
     }
 
     public void setActiveCooldown(double activeCooldown) {
