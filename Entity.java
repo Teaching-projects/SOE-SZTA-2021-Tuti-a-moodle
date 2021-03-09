@@ -1,10 +1,22 @@
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = EntityBuilder.class)
 public class Entity {
     private double health;
     private final double attack;
     private final double defense;
+    private final double cooldown;
     private final String name;
+    private final String lore;
 
-    public Entity(double health, double attack, double defense, String name) {
+    public Entity(
+        double health,
+        double attack,
+        double defense,
+        double cooldown,
+        String name,
+        String lore
+    ) {
         if (health < 0) {
             throw new IllegalArgumentException("Health must not be negative");
         }
@@ -12,7 +24,21 @@ public class Entity {
         this.health = health;
         this.attack = attack;
         this.defense = defense;
+        this.cooldown = cooldown;
         this.name = name;
+        this.lore = lore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLore() {
+        return lore;
+    }
+
+    public double getCooldown() {
+        return cooldown;
     }
 
     public double getHealth() {
@@ -42,9 +68,5 @@ public class Entity {
         if (damage > 0) {
             other.setHealth(other.getHealth() - damage);
         }
-    }
-
-    public String getName() {
-        return name;
     }
 }
