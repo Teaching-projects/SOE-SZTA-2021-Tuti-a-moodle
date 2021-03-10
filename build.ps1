@@ -4,8 +4,8 @@ if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
 }
 
 $Ver = '2.12.1'
-$Deps = @('core', 'databind', 'annotations') | % { './jackson-{0}-{1}.jar' -f $_, $script:Ver }
-$cp = (,'.' + $Deps) -join $Sep
+$Deps = @('core', 'databind', 'annotations') | % { 'dependencies/jackson-{0}-{1}.jar' -f $_, $script:Ver }
+$cp = (,'build' + $Deps) -join $Sep
 
-javac -cp $cp *.java
+javac -d build -cp $cp *.java
 exit $LastExitCode

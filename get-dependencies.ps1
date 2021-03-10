@@ -9,14 +9,14 @@ function Get-Downloader {
 }
 
 function Get-RemoteFile([string] $Url, [string] $Filename) {
-    (Get-Downloader).DownloadFile($Url, $Filename)
+    (Get-Downloader).DownloadFile($Url, "dependencies/$Filename")
 }
 
 $JacksonVer = '2.12.1'
 $JacksonJar = 'jackson-{{0}}-{0}.jar' -f $JacksonVer
 $JacksonUrl = 'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-{{0}}/{0}/{1}' -f $JacksonVer, $JacksonJar
 
-if (Test-Path ($JacksonJar -f 'core') -PathType Leaf) {
+if (Test-Path "dependencies/$($JacksonJar -f 'core')" -PathType Leaf) {
     echo "Jackson is already downloaded, exiting..."
     exit 0
 }
