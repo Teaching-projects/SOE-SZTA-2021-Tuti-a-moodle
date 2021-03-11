@@ -41,12 +41,18 @@ public class EntityReader implements AutoCloseable {
     }
 
     private double readDouble(String message) {
+        boolean shouldThrow = printer != System.out;
+
         while (true) {
             printer.print(message);
             String value = scanner.nextLine();
             try {
                 return Double.parseDouble(value);
             } catch (NumberFormatException ex) {
+                if (shouldThrow) {
+                    throw ex;
+                }
+
                 printer.println(value + " is not a number. Try again.");
             }
         }
