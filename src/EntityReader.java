@@ -1,9 +1,20 @@
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class EntityReader implements AutoCloseable {
+    private final PrintStream printer;
     private final Scanner scanner;
 
     public EntityReader() {
+        printer = System.console() != null
+            ? System.out
+            : new PrintStream(new OutputStream() {
+                @Override
+                public void	write(int b) {
+                    // noop
+                }
+            });
         scanner = new Scanner(System.in);
     }
 
@@ -13,9 +24,9 @@ public class EntityReader implements AutoCloseable {
     }
 
     public Entity readEntity() {
-        System.out.print("Enter the name of the entity: ");
+        printer.print("Enter the name of the entity: ");
         String name = scanner.nextLine();
-        System.out.print("Enter the lore of " + name + ": ");
+        printer.print("Enter the lore of " + name + ": ");
         String lore = scanner.nextLine();
         var entity = new Entity(
             readDouble("Enter the health of " + name + ": "),
@@ -25,18 +36,18 @@ public class EntityReader implements AutoCloseable {
             name,
             lore
         );
-        System.out.println();
+        printer.println();
         return entity;
     }
 
     private double readDouble(String message) {
         while (true) {
-            System.out.print(message);
+            printer.print(message);
             String value = scanner.nextLine();
             try {
                 return Double.parseDouble(value);
             } catch (NumberFormatException ex) {
-                System.out.println(value + " is not a number. Try again.");
+                printer.println(value + " is not a number. Try again.");
             }
         }
     }
