@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,6 +13,9 @@ public class Main {
                 try (var reader = new EntityReader()) {
                     one = reader.readEntity();
                     two = reader.readEntity();
+                } catch (NoSuchElementException ex) {
+                    bail("The input file is too short");
+                    return;
                 }
                 break;
             case 2: {
@@ -21,11 +25,15 @@ public class Main {
                 break;
             }
             default:
-                System.err.println("Invalid number of arguments");
-                System.exit(1);
+                bail("Invalid number of arguments");
                 return;
         }
 
         Battle.battle(one, two);
+    }
+
+    private static void bail(String message) {
+        System.err.println(message);
+        System.exit(1);
     }
 }
