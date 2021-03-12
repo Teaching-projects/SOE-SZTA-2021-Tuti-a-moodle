@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: javac *.java
-      - run: java Main < test1.txt
-      - run: java Main < test2.txt
-      - run: java Main < test3.txt
-      - run: java Main < test4.txt
-      - run: java Main < test5.txt
-      - run: java Main < test6.txt
-      - run: java Main < test7.txt
+      - run: java Main < test/test1.txt
+      - run: java Main < test/test2.txt
+      - run: java Main < test/test3.txt
+      - run: java Main < test/test4.txt
+      - run: java Main < test/test5.txt
+      - run: java Main < test/test6.txt
+      - run: java Main < test/test7.txt
