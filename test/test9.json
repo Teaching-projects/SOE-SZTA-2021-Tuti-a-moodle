@@ -1,0 +1,7 @@
+{
+    "name": "Bob",
+    "lore": "Description for Bob",
+    "health_points": 90,
+    "attack_cooldown": 3,
+    "damage": 60
+}
