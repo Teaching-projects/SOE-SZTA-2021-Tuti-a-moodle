@@ -14,6 +14,7 @@ public class Main {
                     one = readEntity(in);
                     System.out.println();
                     two = readEntity(in);
+                    System.out.println();
                 }
                 break;
             case 2: {
@@ -47,17 +48,14 @@ public class Main {
     }
 
     static double readDouble(Scanner scanner, String msg) {
-        boolean b = true;
-        double value = 0;
-        do {
+        while (true) {
             System.out.print(msg);
-            if (scanner.hasNextFloat()) {
-                value = scanner.nextFloat();
-                b = false;
-            } else {
-                System.out.println(scanner.next() + " is not an acceptable type. ");
+            String value = scanner.nextLine();
+            try {
+                return Double.parseDouble(value);
+            } catch (NumberFormatException ex) {
+                System.out.println(value + " is not a number. Try again.");
             }
-        } while (b);
-        return value;
+        }
     }
 }
