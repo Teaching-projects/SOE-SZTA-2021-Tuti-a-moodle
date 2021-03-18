@@ -26,14 +26,14 @@ jobs:
             psw ./run.ps1 < $test > $test.generated
             diff $test.generated $test.out
           done
-      - run: pwsh ./run.ps1 test/test8.json test/test9.json > test8.generated.txt
-      - run: diff test8.generated.txt test8.txt.out
-      - run: '! pwsh ./run.ps1 test/test8.json > test9.generated.txt'
-      - run: diff test9.generated.txt test9.txt.out
-      - run: pwsh ./run.ps1 test/test9.json test/test9.json > test10.generated.txt
-      - run: diff test10.generated.txt test10.txt.out
-      - run: pwsh ./run.ps1 test/test9.json test/test10.json > test11.generated.txt
-      - run: diff test11.generated.txt test11.txt.out
+      - run: pwsh ./run.ps1 test/test8.json test/test9.json > test/test8.generated.txt
+      - run: diff test/test8.generated.txt test/test8.txt.out
+      - run: '! pwsh ./run.ps1 test/test8.json > test/test9.generated.txt'
+      - run: diff test/test9.generated.txt test/test9.txt.out
+      - run: pwsh ./run.ps1 test/test9.json test/test9.json > test/test10.generated.txt
+      - run: diff test/test10.generated.txt test/test10.txt.out
+      - run: pwsh ./run.ps1 test/test9.json test/test10.json > test/test11.generated.txt
+      - run: diff test/test11.generated.txt test/test11.txt.out
   cleanup:
     if: always()
     needs: [Build_Project, Run_Basic_IO_Tests]
