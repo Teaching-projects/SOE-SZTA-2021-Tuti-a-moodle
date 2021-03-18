@@ -28,8 +28,7 @@ jobs:
           done
       - run: pwsh ./run.ps1 test/test8.json test/test9.json > test/test8.generated.txt
       - run: diff test/test8.generated.txt test/test8.txt.out
-      - run: '! pwsh ./run.ps1 test/test8.json > test/test9.generated.txt'
-      - run: diff test/test9.generated.txt test/test9.txt.out
+      - run: '! pwsh ./run.ps1 test/test8.json'
       - run: pwsh ./run.ps1 test/test9.json test/test9.json > test/test10.generated.txt
       - run: diff test/test10.generated.txt test/test10.txt.out
       - run: pwsh ./run.ps1 test/test9.json test/test10.json > test/test11.generated.txt
