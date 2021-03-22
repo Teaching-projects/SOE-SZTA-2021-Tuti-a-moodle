@@ -10,8 +10,8 @@ jobs:
         with:
           name: ${{ github.sha }}
           path: |
-            *.class
-            *.jar
+            build/*.class
+            dependencies/*.jar
   Run_Basic_IO_Tests:
     needs: Build_Project
     runs-on: ubuntu-latest
