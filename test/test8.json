@@ -1,0 +1,8 @@
+{
+    "name": "John",
+    "lore": "Description for John",
+    "health_points": 100,
+    "attack_cooldown": 2,
+    "damage": 50,
+    "defense": 10
+}

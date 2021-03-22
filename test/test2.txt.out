@@ -1,0 +1,7 @@
+Enter the name of the entity: Enter the lore of A: Enter the health of A: Enter the attack of A: Enter the defense of A: Enter the cooldown of A: 
+Enter the name of the entity: Enter the lore of B: Enter the health of B: Enter the attack of B: Enter the defense of B: Enter the cooldown of B: 
+====================
+A - HP: 100.0, DMG: 50.0, DEF: 60.0
+B - HP: 120.0, DMG: 40.0, DEF: 60.0
+====================
+There wouldn't be damage in combat!

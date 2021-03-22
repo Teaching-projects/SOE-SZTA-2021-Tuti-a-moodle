@@ -1,0 +1,5 @@
+Exception in thread "main" java.lang.IllegalArgumentException: Health must not be negative
+	at Entity.<init>(Entity.java:22)
+	at Main.readEntity(Main.java:44)
+	at Main.main(Main.java:14)
+Enter the name of the entity: Enter the lore of A: Enter the health of A: Enter the attack of A: Enter the defense of A: Enter the cooldown of A: 

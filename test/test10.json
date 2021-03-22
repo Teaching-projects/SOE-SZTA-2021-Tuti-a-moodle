@@ -1,0 +1,7 @@
+{
+    "name": "Max",
+    "lore": "Description for Max",
+    "health_points": 85,
+    "attack_cooldown": 1,
+    "damage": 40
+}
