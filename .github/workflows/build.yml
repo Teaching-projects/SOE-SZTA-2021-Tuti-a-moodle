@@ -33,9 +33,19 @@ jobs:
       - run: diff test/test10.generated.txt test/test10.txt.out
       - run: pwsh ./run.ps1 test/test9.json test/test10.json > test/test11.generated.txt
       - run: diff test/test11.generated.txt test/test11.txt.out
+  junit:
+    needs: Build_Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: ${{ github.sha }}
+          path: '.'
+      - run: pwsh test.ps1
   cleanup:
     if: always()
-    needs: [Build_Project, Run_Basic_IO_Tests]
+    needs: [Build_Project, Run_Basic_IO_Tests, junit]
     runs-on: ubuntu-latest
     steps:
       - uses: geekyeggo/delete-artifact@v1
