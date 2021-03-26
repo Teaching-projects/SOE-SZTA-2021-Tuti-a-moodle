@@ -29,7 +29,8 @@ public class Main {
                 return;
         }
 
-        new Battle().battle(one, two);
+        var printer = System.out;
+        new Battle(printer).battle(one, two);
     }
 
     private static void bail(String message) {

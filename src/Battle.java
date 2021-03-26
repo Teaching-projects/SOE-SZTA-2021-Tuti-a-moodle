@@ -1,5 +1,11 @@
+import java.io.PrintStream;
+
 public class Battle {
-    public Battle() {}
+    private final PrintStream printer;
+
+    public Battle(PrintStream printer) {
+        this.printer = printer;
+    }
 
     public void battle(Entity player1, Entity player2) {
 
@@ -59,23 +65,23 @@ public class Battle {
     }
 
     private void printEntity(Entity entity) {
-        System.out.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
+        printer.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
                 + ", DEF: " + entity.getDefense());
     }
 
     private void printEntityHP(Entity entity) {
-        System.out.println(entity.getName() + " - HP: " + entity.getHealth());
+        printer.println(entity.getName() + " - HP: " + entity.getHealth());
     }
 
     private void printSeparator(char character, int length) {
         for (int i = 0; i < length; i++) {
-            System.out.print(character);
+            printer.print(character);
         }
-        System.out.println();
+        printer.println();
     }
 
     private void printMessage(String message) {
-        System.out.println(message);
+        printer.println(message);
     }
 
     private void healthCheck(Entity player1, Entity player2) {
