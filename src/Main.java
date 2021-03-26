@@ -30,7 +30,18 @@ public class Main {
         }
 
         var printer = System.out;
-        new Battle(printer).battle(one, two);
+        var battleResult = new Battle(printer).battle(one, two);
+        if (!battleResult.isUnbalanced()) {
+            return;
+        }
+
+        var winner = battleResult.getWinner();
+        if (winner == null) {
+            printer.println("There wouldn't be any damage in the combat!");
+            return;
+        }
+
+        printer.println("Unbalanced combat! " + winner.getName() + " won!");
     }
 
     private static void bail(String message) {
