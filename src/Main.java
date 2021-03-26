@@ -29,7 +29,7 @@ public class Main {
                 return;
         }
 
-        Battle.battle(one, two);
+        new Battle().battle(one, two);
     }
 
     private static void bail(String message) {

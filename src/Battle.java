@@ -1,6 +1,7 @@
 public class Battle {
+    public Battle() {}
 
-    public static void battle(Entity player1, Entity player2) {
+    public void battle(Entity player1, Entity player2) {
 
         printSeparator('=', 20);
         printEntity(player1);
@@ -41,7 +42,7 @@ public class Battle {
         }
     }
 
-    private static boolean preTest(Entity player1, Entity player2) {
+    private boolean preTest(Entity player1, Entity player2) {
         if (player1.getAttack() <= player2.getDefense() && player2.getAttack() <= player1.getDefense()) {
             printMessage("There wouldn\'t be damage in combat!");
             return true;
@@ -57,27 +58,27 @@ public class Battle {
         return false;
     }
 
-    private static void printEntity(Entity entity) {
+    private void printEntity(Entity entity) {
         System.out.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
                 + ", DEF: " + entity.getDefense());
     }
 
-    private static void printEntityHP(Entity entity) {
+    private void printEntityHP(Entity entity) {
         System.out.println(entity.getName() + " - HP: " + entity.getHealth());
     }
 
-    private static void printSeparator(char character, int length) {
+    private void printSeparator(char character, int length) {
         for (int i = 0; i < length; i++) {
             System.out.print(character);
         }
         System.out.println();
     }
 
-    private static void printMessage(String message) {
+    private void printMessage(String message) {
         System.out.println(message);
     }
 
-    private static void healthCheck(Entity player1, Entity player2) {
+    private void healthCheck(Entity player1, Entity player2) {
         printEntityHP(player1);
         printEntityHP(player2);
     }
