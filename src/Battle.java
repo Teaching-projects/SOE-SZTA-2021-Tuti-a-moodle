@@ -1,6 +1,13 @@
-public class Battle {
+import java.io.PrintStream;
 
-    public static void battle(Entity player1, Entity player2) {
+public class Battle {
+    private final PrintStream printer;
+
+    public Battle(PrintStream printer) {
+        this.printer = printer;
+    }
+
+    public BattleResult battle(Entity player1, Entity player2) {
 
         printSeparator('=', 20);
         printEntity(player1);
@@ -8,8 +15,9 @@ public class Battle {
 
         printSeparator('=', 20);
 
-        if (preTest(player1, player2)) {
-            return;
+        var preTestResult = preTest(player1, player2);
+        if (preTestResult != null) {
+            return preTestResult;
         }
 
         printMessage("The Battle begins.");
@@ -35,50 +43,65 @@ public class Battle {
 
         if (!player1.isAlive() && !player2.isAlive()) {
             printMessage("Both heroes are dead!");
-        } else {
-            String result = player1.isAlive() ? player1.getName() : player2.getName();
-            printMessage(result + " won!");
+            return new BattleResult(false, null);
         }
+
+        Entity winner = player1.isAlive() ? player1 : player2;
+        printMessage(winner.getName() + " won!");
+        return new BattleResult(false, winner);
     }
 
-    private static boolean preTest(Entity player1, Entity player2) {
+    private BattleResult preTest(Entity player1, Entity player2) {
         if (player1.getAttack() <= player2.getDefense() && player2.getAttack() <= player1.getDefense()) {
-            printMessage("There wouldn\'t be damage in combat!");
-            return true;
+            return new BattleResult(true, null);
         } else if (player2.getAttack() <= player1.getDefense()) {
-            printMessage("Unbalanced combat!");
-            printMessage(player1.getName() + " won!");
-            return true;
+            return new BattleResult(true, player1);
         } else if (player1.getAttack() <= player2.getDefense()) {
-            printMessage("Unbalanced combat!");
-            printMessage(player2.getName() + " won!");
-            return true;
+            return new BattleResult(true, player2);
         }
-        return false;
+        return null;
     }
 
-    private static void printEntity(Entity entity) {
-        System.out.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
+    private void printEntity(Entity entity) {
+        printer.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
                 + ", DEF: " + entity.getDefense());
     }
 
-    private static void printEntityHP(Entity entity) {
-        System.out.println(entity.getName() + " - HP: " + entity.getHealth());
+    private void printEntityHP(Entity entity) {
+        printer.println(entity.getName() + " - HP: " + entity.getHealth());
     }
 
-    private static void printSeparator(char character, int length) {
+    private void printSeparator(char character, int length) {
         for (int i = 0; i < length; i++) {
-            System.out.print(character);
+            printer.print(character);
         }
-        System.out.println();
+        printer.println();
     }
 
-    private static void printMessage(String message) {
-        System.out.println(message);
+    private void printMessage(String message) {
+        printer.println(message);
     }
 
-    private static void healthCheck(Entity player1, Entity player2) {
+    private void healthCheck(Entity player1, Entity player2) {
         printEntityHP(player1);
         printEntityHP(player2);
+    }
+
+    public static class BattleResult {
+        private final boolean unbalanced;
+        private final Entity winner;
+
+        public BattleResult(boolean unbalanced, Entity winner) {
+            this.unbalanced = unbalanced;
+            this.winner = winner;
+        }
+
+        public boolean isUnbalanced() {
+            return unbalanced;
+        }
+
+        public Entity getWinner() {
+            return winner;
+        }
     }
 }

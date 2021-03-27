@@ -1,6 +1,6 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -10,11 +10,12 @@ public class Main {
         final Entity two;
         switch (args.length) {
             case 0:
-                try (Scanner in = new Scanner(System.in)) {
-                    one = readEntity(in);
-                    System.out.println();
-                    two = readEntity(in);
-                    System.out.println();
+                try (var reader = new EntityReader()) {
+                    one = reader.readEntity();
+                    two = reader.readEntity();
+                } catch (NoSuchElementException ex) {
+                    bail("The input file is too short");
+                    return;
                 }
                 break;
             case 2: {
@@ -24,38 +25,27 @@ public class Main {
                 break;
             }
             default:
-                System.err.println("Invalid number of arguments");
-                System.exit(1);
+                bail("Invalid number of arguments");
                 return;
         }
 
-        Battle.battle(one, two);
-    }
-
-    static Entity readEntity(Scanner in) {
-        System.out.print("Enter the name of the entity: ");
-        String name = in.nextLine();
-        System.out.print("Enter the lore of " + name + ": ");
-        String lore = in.nextLine();
-        return new Entity(
-            readDouble(in, "Enter the health of " + name + ": "),
-            readDouble(in, "Enter the attack of " + name + ": "),
-            readDouble(in, "Enter the defense of " + name + ": "),
-            readDouble(in, "Enter the cooldown of " + name + ": "),
-            name,
-            lore
-        );
-    }
-
-    static double readDouble(Scanner scanner, String msg) {
-        while (true) {
-            System.out.print(msg);
-            String value = scanner.nextLine();
-            try {
-                return Double.parseDouble(value);
-            } catch (NumberFormatException ex) {
-                System.out.println(value + " is not a number. Try again.");
-            }
+        var printer = System.out;
+        var battleResult = new Battle(printer).battle(one, two);
+        if (!battleResult.isUnbalanced()) {
+            return;
         }
+
+        var winner = battleResult.getWinner();
+        if (winner == null) {
+            printer.println("There wouldn't be any damage in the combat!");
+            return;
+        }
+
+        printer.println("Unbalanced combat! " + winner.getName() + " won!");
+    }
+
+    private static void bail(String message) {
+        System.err.println(message);
+        System.exit(1);
     }
 }
