@@ -2,14 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 class Gui extends JFrame {
-    private EntityPanel one;
-    private EntityPanel two;
+    private final EntityPanel one;
+    private final EntityPanel two;
 
     public Gui() {
-        initUI();
-    }
-
-    private void initUI() {
         setLayout(new BorderLayout());
 
         one = new EntityPanel();
@@ -20,7 +16,7 @@ class Gui extends JFrame {
         contentPane.add(two, BorderLayout.LINE_END);
 
         setTitle("Fapados RPG");
-        setSize(300, 400);
+        setSize(750, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
