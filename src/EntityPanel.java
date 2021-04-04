@@ -7,10 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EntityPanel extends JPanel implements ActionListener {
     static private final String newline = "\n";
-    JButton openButton;
-    JTextArea textArea;
-    JFileChooser jfc;
-    Entity entity;
+    private final JButton openButton;
+    private JTextArea textArea;
+    private final JFileChooser jfc;
+    private Entity entity;
 
     public EntityPanel() {
         super(new BorderLayout());
