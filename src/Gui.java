@@ -12,7 +12,7 @@ class Gui extends JFrame {
         two = new EntityPanel();
         Container contentPane = getContentPane();
         contentPane.add(one, BorderLayout.LINE_START);
-        contentPane.add(new VSPanel(one, two), BorderLayout.CENTER);
+        contentPane.add(new BattlePanel(one, two), BorderLayout.CENTER);
         contentPane.add(two, BorderLayout.LINE_END);
 
         setTitle("Fapados RPG");

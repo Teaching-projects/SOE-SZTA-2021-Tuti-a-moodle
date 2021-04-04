@@ -7,18 +7,20 @@ import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
 
-public class VSPanel extends JPanel implements ActionListener {
+public class BattlePanel extends JPanel implements ActionListener {
 
-    JButton button;
-    JTextArea textArea;
-    EntityPanel one;
-    EntityPanel two;
+    private final JButton button;
+    private final JTextArea textArea;
+    private final EntityPanel one;
+    private final EntityPanel two;
 
-    public VSPanel(EntityPanel one, EntityPanel two) {
+    public BattlePanel(EntityPanel one, EntityPanel two) {
         super(new BorderLayout());
         this.one = one;
         this.two = two;
-        textArea = new JTextArea();
+        textArea = new JTextArea(10, 30);
+        textArea.setEditable(false);
+
         try {
             BufferedImage myPicture = ImageIO.read(new File("./img/vs.png"));
             Image scaledImage = myPicture.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
@@ -40,19 +42,22 @@ public class VSPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            var printer = new PrintStream(new TextAreaOutputStream(textArea));
-            var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
-            if (!battleResult.isUnbalanced()) {
-                return;
-            }
+            textArea.setText("");
+            if (one.getEntity() != null && two.getEntity() != null) {
+                var printer = new PrintStream(new TextAreaOutputStream(textArea));
+                var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
+                if (!battleResult.isUnbalanced()) {
+                    return;
+                }
 
-            var winner = battleResult.getWinner();
-            if (winner == null) {
-                printer.println("There wouldn't be any damage in the combat!");
-                return;
-            }
+                var winner = battleResult.getWinner();
+                if (winner == null) {
+                    printer.println("There wouldn't be any damage in the combat!");
+                    return;
+                }
 
-            printer.println("Unbalanced combat! " + winner.getName() + " won!");
+                printer.println("Unbalanced combat! " + winner.getName() + " won!");
+            }
         }
     }
 }
