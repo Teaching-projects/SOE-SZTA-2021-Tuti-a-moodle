@@ -47,6 +47,8 @@ public class BattlePanel extends JPanel implements ActionListener {
                 var printer = new PrintStream(new TextAreaOutputStream(textArea));
                 var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
                 if (!battleResult.isUnbalanced()) {
+                    one.refreshTextArea();
+                    two.refreshTextArea();
                     return;
                 }
 
@@ -57,6 +59,8 @@ public class BattlePanel extends JPanel implements ActionListener {
                 }
 
                 printer.println("Unbalanced combat! " + winner.getName() + " won!");
+                one.refreshTextArea();
+                two.refreshTextArea();
             }
         }
     }
