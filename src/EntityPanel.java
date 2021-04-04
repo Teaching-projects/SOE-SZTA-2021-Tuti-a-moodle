@@ -44,10 +44,10 @@ public class EntityPanel extends JPanel implements ActionListener {
                 try {
                     var objectMapper = new ObjectMapper();
                     entity = objectMapper.readValue(new File(jfc.getSelectedFile().getAbsolutePath()), Entity.class);
-                    textArea.setText("");
-                    textArea.append(entity + "." + newline);
+                    refreshTextArea();
                 } catch (Exception ex) {
-                    // TODO: handle exception
+                    System.err.println("Oops, something went wrong");
+                    System.exit(1);
                 }
             } else {
                 textArea.append("Open command cancelled by user." + newline);
@@ -58,5 +58,14 @@ public class EntityPanel extends JPanel implements ActionListener {
 
     public Entity getEntity() {
         return entity;
+    }
+
+    public void refreshTextArea() {
+        textArea.setText("");
+        textArea.append(entity.getName() + newline);
+        textArea.append(entity.getLore() + newline);
+        textArea.append("Attack: " + entity.getAttack() + newline);
+        textArea.append("Defense: " + entity.getDefense() + newline);
+        textArea.append("Cooldown: " + entity.getCooldown() + newline);
     }
 }
