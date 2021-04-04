@@ -18,6 +18,14 @@ public class Main {
                     return;
                 }
                 break;
+            case 1: {
+                if (args[0].equals("GUI")) {
+                    new Gui();
+                } else {
+                    bail("Invalid argument");
+                }
+                return;
+            }
             case 2: {
                 var objectMapper = new ObjectMapper();
                 one = objectMapper.readValue(new File(args[0]), Entity.class);
