@@ -64,6 +64,7 @@ public class EntityPanel extends JPanel implements ActionListener {
         textArea.setText("");
         textArea.append(entity.getName() + newline);
         textArea.append(entity.getLore() + newline);
+        textArea.append("Health: " + entity.getHealth() + newline);
         textArea.append("Attack: " + entity.getAttack() + newline);
         textArea.append("Defense: " + entity.getDefense() + newline);
         textArea.append("Cooldown: " + entity.getCooldown() + newline);
