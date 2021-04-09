@@ -19,7 +19,7 @@ public class Main {
                 }
                 break;
             case 1: {
-                if (args[0].equals("GUI")) {
+                if (args[0].equals("gui")) {
                     new Gui();
                 } else {
                     bail("Invalid argument");
