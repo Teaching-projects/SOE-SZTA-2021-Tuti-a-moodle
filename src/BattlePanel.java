@@ -42,27 +42,31 @@ public class BattlePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button) {
-            textArea.setText("");
-            if (one.getEntity() != null && two.getEntity() != null) {
-                var printer = new PrintStream(new TextAreaOutputStream(textArea));
-                var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
-                if (!battleResult.isUnbalanced()) {
-                    one.refreshTextArea();
-                    two.refreshTextArea();
-                    return;
-                }
-
-                var winner = battleResult.getWinner();
-                if (winner == null) {
-                    printer.println("There wouldn't be any damage in the combat!");
-                    return;
-                }
-
-                printer.println("Unbalanced combat! " + winner.getName() + " won!");
-                one.refreshTextArea();
-                two.refreshTextArea();
-            }
+        if (e.getSource() != button) {
+            return;
         }
+
+        textArea.setText("");
+        if (one.getEntity() == null || two.getEntity() == null) {
+            return;
+        }
+
+        var printer = new PrintStream(new TextAreaOutputStream(textArea));
+        var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
+        if (!battleResult.isUnbalanced()) {
+            one.refreshTextArea();
+            two.refreshTextArea();
+            return;
+        }
+
+        var winner = battleResult.getWinner();
+        if (winner == null) {
+            printer.println("There wouldn't be any damage in the combat!");
+            return;
+        }
+
+        printer.println("Unbalanced combat! " + winner.getName() + " won!");
+        one.refreshTextArea();
+        two.refreshTextArea();
     }
 }
