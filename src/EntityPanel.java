@@ -6,7 +6,6 @@ import javax.swing.filechooser.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EntityPanel extends JPanel implements ActionListener {
-    static private final String newline = "\n";
     private final JButton openButton;
     private JTextArea textArea;
     private final JFileChooser jfc;
@@ -51,7 +50,7 @@ public class EntityPanel extends JPanel implements ActionListener {
                     System.exit(1);
                 }
             } else {
-                textArea.append("Open command cancelled by user." + newline);
+                textArea.append("Open command cancelled by user.");
             }
             textArea.setCaretPosition(textArea.getDocument().getLength());
         }
@@ -63,11 +62,13 @@ public class EntityPanel extends JPanel implements ActionListener {
 
     public void refreshTextArea() {
         textArea.setText("");
-        textArea.append(entity.getName() + newline);
-        textArea.append(entity.getLore() + newline);
-        textArea.append("Health: " + entity.getHealth() + newline);
-        textArea.append("Attack: " + entity.getAttack() + newline);
-        textArea.append("Defense: " + entity.getDefense() + newline);
-        textArea.append("Cooldown: " + entity.getCooldown() + newline);
+        textArea.append(entity.getName() + "\n");
+        textArea.append("\n");
+        textArea.append(entity.getLore() + "\n");
+        textArea.append("\n");
+        textArea.append("Health: " + entity.getHealth() + "\n");
+        textArea.append("Attack: " + entity.getAttack() + "\n");
+        textArea.append("Defense: " + entity.getDefense() + "\n");
+        textArea.append("Cooldown: " + entity.getCooldown() + "\n");
     }
 }
