@@ -51,6 +51,7 @@ public class EntityPanel extends JPanel implements ActionListener {
                 }
             } else {
                 textArea.append("Open command cancelled by user.");
+                clearPanel();
             }
             textArea.setCaretPosition(textArea.getDocument().getLength());
         }
@@ -70,5 +71,10 @@ public class EntityPanel extends JPanel implements ActionListener {
         textArea.append("Attack: " + entity.getAttack() + "\n");
         textArea.append("Defense: " + entity.getDefense() + "\n");
         textArea.append("Cooldown: " + entity.getCooldown() + "\n");
+    }
+
+    public void clearPanel() {
+        entity = null;
+        textArea.setText("");
     }
 }
