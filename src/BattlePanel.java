@@ -26,7 +26,8 @@ public class BattlePanel extends JPanel implements ActionListener {
             Image scaledImage = myPicture.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
             add(new JLabel(new ImageIcon(scaledImage)), BorderLayout.PAGE_START);
         } catch (Exception e) {
-            // TODO: handle exception
+            JOptionPane.showMessageDialog(null, "Oops, something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
         button = new JButton("Fight!");
         button.addActionListener(this);
