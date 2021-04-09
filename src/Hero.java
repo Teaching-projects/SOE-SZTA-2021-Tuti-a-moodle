@@ -1,12 +1,14 @@
+
 public class Hero extends Entity {
 
     private int currentLevel;
-    private int currentXp;
+    private double currentXp;
     private int xpPerLevel;
     private int dmgIncreasePerLevel;
     private int hpIncreasePerLevel;
     private float cooldownMultiplierPerLevel;
     private double originalHealth;
+    private double lvlTreshHold;
     private double activeCooldown = 0;
 
     public Hero(
@@ -17,11 +19,12 @@ public class Hero extends Entity {
         String name,
         String lore,
         int currentLevel,
-        int currentXp,
+        double currentXp,
         int xpPerLevel,
         int dmgIncreasePerLevel,
         int hpIncreasePerLevel,
         double originalHealth,
+        double lvlTreshHold,
         float cooldownMultiplierPerLevel) {
 
         super(health, attack, defense, cooldown, name, lore);
@@ -33,6 +36,7 @@ public class Hero extends Entity {
         this.hpIncreasePerLevel=hpIncreasePerLevel;
         this.cooldownMultiplierPerLevel=cooldownMultiplierPerLevel;
         this.originalHealth=originalHealth;
+        this.lvlTreshHold=lvlTreshHold;
     }
 
     public float getcooldownMultiplierPerLevel() {
@@ -63,11 +67,11 @@ public class Hero extends Entity {
         return xpPerLevel;
     }
 
-    public int getCurrentXp(){
+    public double getCurrentXp(){
         return currentXp;
     }
 
-    public void setCurrent_xp(int currentXp){
+    public void setCurrent_xp(double currentXp){
         this.currentXp=currentXp;
     }
 
@@ -82,22 +86,34 @@ public class Hero extends Entity {
     public void setCurrent_level(int currentLevel) {
         this.currentLevel = currentLevel;
     }
+
+    public double getLvlTreshHold(){
+        return lvlTreshHold;
+    }
+
+    public void setLvlTreshHold(double lvlTreshHold) {
+        this.lvlTreshHold=lvlTreshHold;
+    }
     
 @Override
     public void attack(Entity other) {
         super.attack(other);
-        setCurrent_xp(getCurrentXp()+1);
+        setCurrent_xp(getCurrentXp()+getAttack());
+        if(getCurrentXp()>=getLvlTreshHold()){
+            lvlup();
+        }
     }
 
     public double getOriginalHealth(){
         return originalHealth;
     }
 
-    public void lvlup(Hero h){
-        h.setCurrent_level(getCurrent_level()+1);
-        h.setAttack(getAttack()+getDmgIncreasePerLevel());
-        h.setHealth(h.getOriginalHealth()+h.gethpIncreasePerLevel());
-        h.setCurrent_xp(0);
-        h.setCooldown(getCooldown()+getcooldownMultiplierPerLevel());;
+    public void lvlup(){
+        setCurrent_level(getCurrent_level()+1);
+        setAttack(getAttack()+getDmgIncreasePerLevel());
+        setHealth(getOriginalHealth()+gethpIncreasePerLevel());
+        setCurrent_xp(0);
+        setCooldown(getCooldown()+getcooldownMultiplierPerLevel());
+        setLvlTreshHold(getLvlTreshHold()*1.2);
     }
 }
