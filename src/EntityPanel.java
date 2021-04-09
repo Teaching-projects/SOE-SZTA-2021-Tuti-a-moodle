@@ -46,7 +46,8 @@ public class EntityPanel extends JPanel implements ActionListener {
                     entity = objectMapper.readValue(new File(jfc.getSelectedFile().getAbsolutePath()), Entity.class);
                     refreshTextArea();
                 } catch (Exception ex) {
-                    System.err.println("Oops, something went wrong");
+                    JOptionPane.showMessageDialog(null, "Oops, something went wrong", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     System.exit(1);
                 }
             } else {
