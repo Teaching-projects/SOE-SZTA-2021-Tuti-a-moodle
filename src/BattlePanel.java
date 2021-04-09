@@ -54,19 +54,46 @@ public class BattlePanel extends JPanel implements ActionListener {
         var printer = new PrintStream(new TextAreaOutputStream(textArea));
         var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
         if (!battleResult.isUnbalanced()) {
-            one.refreshTextArea();
-            two.refreshTextArea();
+            var winner = battleResult.getWinner();
+            if (one.getEntity().equals(winner)) {
+                popupOutcome(winner.getName() + " won!");
+                one.refreshTextArea();
+                two.clearPanel();
+                return;
+            }
+
+            if (two.getEntity().equals(winner)) {
+                popupOutcome(winner.getName() + " won!");
+                two.refreshTextArea();
+                one.clearPanel();
+                return;
+            }
+
+            popupOutcome("Both heroes are dead!");
+            one.clearPanel();
+            two.clearPanel();
             return;
         }
 
         var winner = battleResult.getWinner();
         if (winner == null) {
             printer.println("There wouldn't be any damage in the combat!");
+            popupOutcome("There wouldn't be any damage in the combat!");
             return;
         }
 
         printer.println("Unbalanced combat! " + winner.getName() + " won!");
-        one.refreshTextArea();
-        two.refreshTextArea();
+        popupOutcome("Unbalanced combat! " + winner.getName() + " won!");
+        if (one.getEntity().equals(winner)) {
+            one.refreshTextArea();
+            two.clearPanel();
+        } else {
+            two.refreshTextArea();
+            one.clearPanel();
+        }
+    }
+
+    private void popupOutcome(String message) {
+        JOptionPane.showMessageDialog(null, message, "Outcome of the fight", JOptionPane.PLAIN_MESSAGE);
     }
 }
