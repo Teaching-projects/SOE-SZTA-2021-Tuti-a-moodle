@@ -1,4 +1,6 @@
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+@JsonDeserialize(builder = EntityDeserializer.class)
 public class Hero extends Entity {
 
     private int currentLevel;
@@ -6,7 +8,7 @@ public class Hero extends Entity {
     private int xpPerLevel;
     private int dmgIncreasePerLevel;
     private int hpIncreasePerLevel;
-    private float cooldownMultiplierPerLevel;
+    private double cooldownMultiplierPerLevel;
     private double originalHealth;
     private double lvlTreshHold;
     private double activeCooldown = 0;
@@ -18,32 +20,26 @@ public class Hero extends Entity {
         double cooldown,
         String name,
         String lore,
-        int currentLevel,
-        double currentXp,
         int xpPerLevel,
         int dmgIncreasePerLevel,
         int hpIncreasePerLevel,
-        double originalHealth,
-        double lvlTreshHold,
-        float cooldownMultiplierPerLevel) {
+        double cooldownMultiplierPerLevel
+        ) {
 
         super(health, attack, defense, cooldown, name, lore);
         
-        this.currentXp=currentXp;
-        this.currentLevel=currentLevel;
         this.xpPerLevel=xpPerLevel;
         this.dmgIncreasePerLevel=dmgIncreasePerLevel;
         this.hpIncreasePerLevel=hpIncreasePerLevel;
         this.cooldownMultiplierPerLevel=cooldownMultiplierPerLevel;
-        this.originalHealth=originalHealth;
-        this.lvlTreshHold=lvlTreshHold;
+        
     }
 
-    public float getcooldownMultiplierPerLevel() {
+    public double getcooldownMultiplierPerLevel() {
         return cooldownMultiplierPerLevel;
     }
 
-    public void setcooldownMultiplierPerLevel(float cooldownMultiplierPerLevel) {
+    public void setcooldownMultiplierPerLevel(double cooldownMultiplierPerLevel) {
         this.cooldownMultiplierPerLevel = cooldownMultiplierPerLevel;
     }
 

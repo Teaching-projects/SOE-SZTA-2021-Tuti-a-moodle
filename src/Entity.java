@@ -1,11 +1,11 @@
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize(builder = EntityBuilder.class)
+@JsonDeserialize(builder = EntityDeserializer.class)
 public class Entity {
     private double health;
     private double attack;
     private final double defense;
-    private final double cooldown;
+    private double cooldown;
     private final String name;
     private final String lore;
     private double activeCooldown = 0;
