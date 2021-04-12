@@ -5,6 +5,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.jupiter.params.provider.NullSource;
+
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +55,34 @@ public class DummyTest {
     }
 
     @Test
+    @DisplayName("Test if cooldown bigger than 0")
+    void testCooldownBiggerThanZero() {
+
+        Entity entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
+        
+        assertEquals(entity.getCooldown() >= 0, true, "Wrong cooldown");
+    }
+
+   
+    @Test
+    @DisplayName("Test if attack bigger than 0")
+    void testAttackBiggerThanZero() {
+
+        Entity entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
+        
+        assertEquals(entity.getAttack() >= 0, true, "Wrong attack");
+    }
+
+    @Test
+    @DisplayName("Test if defense bigger than 0")
+    void testDefenseBiggerThanZero() {
+
+        Entity entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
+        
+        assertEquals(entity.getDefense() >= 0, true, "Wrong defense");
+    }
+
+    @Test
     @DisplayName("Test if health is below 0")
     void exceptionTestingHealth() {
         //This assetion will fail
@@ -63,8 +94,8 @@ public class DummyTest {
 
             assertEquals("Health must not be negative", exception.getMessage());
     }
-
   
+    
     @Test
     public void dummyTest() {
         assertTrue(true);
