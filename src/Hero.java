@@ -1,17 +1,13 @@
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize(builder = EntityDeserializer.class)
 public class Hero extends Entity {
 
-    private int currentLevel;
-    private double currentXp;
-    private int xpPerLevel;
+    private int currentLevel = 1;
+    private double currentXp = 0;
+    private double xpPerLevel;
     private int dmgIncreasePerLevel;
     private int hpIncreasePerLevel;
     private double cooldownMultiplierPerLevel;
-    private double originalHealth;
-    private double lvlTreshHold;
-    private double activeCooldown = 0;
+    private double originalHealth = getHealth();
 
     public Hero(
         double health,
@@ -59,7 +55,7 @@ public class Hero extends Entity {
         this.dmgIncreasePerLevel = dmgIncreasePerLevel;
     }
 
-    public int getXpPerLevel() {
+    public double getXpPerLevel() {
         return xpPerLevel;
     }
 
@@ -71,7 +67,7 @@ public class Hero extends Entity {
         this.currentXp=currentXp;
     }
 
-    public void setXp_per_level(int xpPerLevel) {
+    public void setXp_per_level(double xpPerLevel) {
         this.xpPerLevel = xpPerLevel;
     }
 
@@ -82,20 +78,12 @@ public class Hero extends Entity {
     public void setCurrent_level(int currentLevel) {
         this.currentLevel = currentLevel;
     }
-
-    public double getLvlTreshHold(){
-        return lvlTreshHold;
-    }
-
-    public void setLvlTreshHold(double lvlTreshHold) {
-        this.lvlTreshHold=lvlTreshHold;
-    }
     
 @Override
     public void attack(Entity other) {
         super.attack(other);
         setCurrent_xp(getCurrentXp()+getAttack());
-        if(getCurrentXp()>=getLvlTreshHold()){
+        if(getCurrentXp()>=getXpPerLevel()){
             lvlup();
         }
     }
@@ -110,6 +98,6 @@ public class Hero extends Entity {
         setHealth(getOriginalHealth()+gethpIncreasePerLevel());
         setCurrent_xp(0);
         setCooldown(getCooldown()+getcooldownMultiplierPerLevel());
-        setLvlTreshHold(getLvlTreshHold()*1.2);
+        setXp_per_level(xpPerLevel*1.2);
     }
 }
