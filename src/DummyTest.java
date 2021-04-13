@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
-
+import org.junit.jupiter.api.function.Executable;
 
 
 
@@ -82,7 +82,7 @@ public class DummyTest {
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(entity.getCooldown() >= 0, true, "Wrong cooldown");
+        assertEquals(entity.getCooldown(), 2, "Wrong cooldown");
     }
 
    
@@ -96,7 +96,7 @@ public class DummyTest {
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(entity.getAttack() >= 0, true, "Wrong attack");
+        assertEquals(entity.getAttack(), 50, "Wrong attack");
     }
 
     @Test
@@ -116,21 +116,13 @@ public class DummyTest {
     @DisplayName("Test if health is below 0")
     void exceptionTestingHealth() {
         // Arrange
-        Entity entity;
+        Executable executable;
 
         //Act
+        executable = () -> new Entity(-1, 50, 40, 2, "Bob", "Bob story");
 
-        //This assetion will fail
-        try{
-        entity = new Entity(-1, 50, 40, 2, "Bob", "Bob story");
-        
-        // Exception exception = assertThrows(
-        //     IllegalArgumentException.class,
-        //     () -> entity.getHealth());
-        } catch (IllegalArgumentException e) {
-            // Assert
-            assertEquals("Health must not be negative", e.getMessage());
-        }
+        // Assert
+        assertThrows(IllegalArgumentException.class, executable, "Exception handling failed");
     }
   
     
