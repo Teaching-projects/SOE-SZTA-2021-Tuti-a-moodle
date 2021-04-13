@@ -40,10 +40,10 @@ public class EntityDeserializer extends JsonDeserializer<Entity> {
     
     private Hero buildHero(ObjectNode object){
         
-        var xpPerLevel = object.get("xp_per_level");
-        var dmgIncreacePerLevel = object.get("dmg_increase_per_level");
-        var hpIncreasePerLevel = object.get("hp_increase_per_level");
-        var cooldownMultiplierPerLevel= object.get("cooldown_multiplier_per_level");
+        int xpPerLevel = object.get("xp_per_level").asInt();
+        int dmgIncreacePerLevel = object.get("dmg_increase_per_level").asInt();
+        int hpIncreasePerLevel = object.get("hp_increase_per_level").asInt();
+        double cooldownMultiplierPerLevel= object.get("cooldown_multiplier_per_level").asDouble();
         var defense = object.get("defense");
 
             return new Hero(
@@ -53,10 +53,10 @@ public class EntityDeserializer extends JsonDeserializer<Entity> {
                 object.get("attack_cooldown").asDouble(),
                 object.get("name").asText(),
                 object.get("lore").asText(),
-                xpPerLevel == null ? 0 : xpPerLevel.asInt(),
-                dmgIncreacePerLevel == null ? 0 : dmgIncreacePerLevel.asInt(),
-                hpIncreasePerLevel == null ? 0 : hpIncreasePerLevel.asInt(),
-                cooldownMultiplierPerLevel == null ? 0.0 : cooldownMultiplierPerLevel.asDouble()
+                xpPerLevel,
+                dmgIncreacePerLevel,
+                hpIncreasePerLevel,
+                cooldownMultiplierPerLevel
                 );
     }
 
