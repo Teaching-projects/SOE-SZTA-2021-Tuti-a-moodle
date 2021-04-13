@@ -1,4 +1,3 @@
-
 public class Hero extends Entity {
 
     private int currentLevel = 1;
