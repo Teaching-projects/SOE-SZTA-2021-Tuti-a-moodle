@@ -113,6 +113,44 @@ public class DummyTest {
     }
 
     @Test
+    @DisplayName("Test attack")
+    void testAttack() {
+        // Arrange
+        Entity entity1;
+        Entity entity2;
+
+        //Act
+        entity1 = new Entity(100, 50, 40, 2, "Bob", "Bob story");
+        entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
+
+        // Assert
+        assertEquals(entity1.getAttack() - entity2.getDefense(), 20, "Wrong attack");
+
+        assertEquals(entity2.getAttack() - entity1.getDefense(), 0, "Wrong attack");
+       
+    }
+
+    @Test
+    @DisplayName("Test attack with attack() function")
+    void testAttackWithAttackFunction() {
+        // Arrange
+        Entity entity1;
+        Entity entity2;
+
+        //Act
+        entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
+        entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
+
+        // Assert
+        entity1.attack(entity2);
+        assertEquals(entity2.getHealth(), 70, "Wrong attack");
+
+        entity2.attack(entity1);
+        assertEquals(entity1.getHealth(), 95, "Wrong attack");
+       
+    }
+
+    @Test
     @DisplayName("Test if health is below 0")
     void exceptionTestingHealth() {
         // Arrange
