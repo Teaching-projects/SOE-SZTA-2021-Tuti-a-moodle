@@ -6,7 +6,7 @@ public class Entity {
     private final String name;
     private final String lore;
     private double activeCooldown = 0;
-
+    
     public Entity(
         double health,
         double attack,
@@ -62,7 +62,7 @@ public class Entity {
         return defense;
     }
     
-    public void attack(Entity other) {
+    public double attack(Entity other) {
         double damage = getAttack() - other.getDefense();
 
         // avoid healing the other entity
@@ -71,9 +71,11 @@ public class Entity {
         }
 
         setActiveCooldown(getCooldown());
+
+        return damage;
     }
 
-    public void setActiveCooldown(double activeCooldown) {
+    protected void setActiveCooldown(double activeCooldown) {
         this.activeCooldown = activeCooldown;
     }
 
