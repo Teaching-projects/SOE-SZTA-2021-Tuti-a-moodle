@@ -3,5 +3,10 @@
     "lore": "Description for Bob",
     "health_points": 90,
     "attack_cooldown": 3,
-    "damage": 60
+    "damage": 60,
+    "xp_per_level": 40,
+    "dmg_increase_per_level": 2,
+    "hp_increase_per_level": 5,
+    "cooldown_multiplier_per_level": 0.1
+    
 }
