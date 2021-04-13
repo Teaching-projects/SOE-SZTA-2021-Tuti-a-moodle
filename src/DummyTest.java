@@ -56,7 +56,7 @@ public class DummyTest {
         entity = new Entity(0, 20, 60, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(false, entity.isAlive(), "Wrong health");
+        assertFalse(entity.isAlive(), "Wrong health");
     }
 
     @Test
@@ -69,7 +69,7 @@ public class DummyTest {
         entity = new Entity(5, 50, 40, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(true, entity.isAlive(), "Wrong health");
+        assertTrue(entity.isAlive(), "Wrong health");
     }
 
     @Test
