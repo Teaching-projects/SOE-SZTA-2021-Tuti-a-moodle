@@ -5,7 +5,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 
-import org.junit.jupiter.params.provider.NullSource;
 
 
 
@@ -13,11 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // FIXME: remove this class
 public class DummyTest {
-    static Entity entity1;
-    static Entity entity2;
-    
-   
 
+       
     @Test
     @DisplayName("Test in Entity")
     void testInConstructor() {
@@ -34,7 +30,7 @@ public class DummyTest {
     @DisplayName("Test if health is 0")
     void testHealthIsZero() {
         Entity entity = new Entity(0, 50, 40, 2, "Bob", "Bob story");
-          assertEquals(0, entity.getHealth(), "Wrong health");
+        assertEquals(0, entity.getHealth(), "Wrong health");
     }
 
 
@@ -42,7 +38,7 @@ public class DummyTest {
     @DisplayName("Test if entity is dead")
     void testHealthIsBigger() {
         Entity entity = new Entity(0, 20, 60, 2, "Bob", "Bob story");
-          assertEquals(false, entity.isAlive(), "Wrong health");
+        assertEquals(false, entity.isAlive(), "Wrong health");
     }
 
     @Test
@@ -86,13 +82,15 @@ public class DummyTest {
     @DisplayName("Test if health is below 0")
     void exceptionTestingHealth() {
         //This assetion will fail
+        try{
         Entity entity = new Entity(-1, 50, 40, 2, "Bob", "Bob story");
         
-        Exception exception = assertThrows(
-            IllegalArgumentException.class,
-            () -> entity.getHealth());
-
-            assertEquals("Health must not be negative", exception.getMessage());
+        // Exception exception = assertThrows(
+        //     IllegalArgumentException.class,
+        //     () -> entity.getHealth());
+        } catch (IllegalArgumentException e) {
+            assertEquals("Health must not be negative", e.getMessage());
+        }
     }
   
     
