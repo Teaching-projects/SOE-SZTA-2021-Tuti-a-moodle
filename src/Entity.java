@@ -1,13 +1,10 @@
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-@JsonDeserialize(builder = EntityBuilder.class)
 public class Entity {
-    private double health;
-    private final double attack;
     private final double defense;
-    private final double cooldown;
     private final String name;
     private final String lore;
+    private double health;
+    private double attack;
+    private double cooldown;
     private double activeCooldown = 0;
 
     public Entity(
@@ -42,11 +39,15 @@ public class Entity {
         return cooldown;
     }
 
+    protected void setCooldown(double cooldown) {
+        this.cooldown = cooldown;
+    }
+
     public double getHealth() {
         return health;
     }
 
-    private void setHealth(double health) {
+    protected void setHealth(double health) {
         this.health = Math.max(0.0, health);
     }
 
@@ -58,11 +59,15 @@ public class Entity {
         return attack;
     }
 
+    protected void setAttack(double attack) {
+        this.attack = attack;
+    }
+
     public double getDefense() {
         return defense;
     }
 
-    public void attack(Entity other) {
+    public double attack(Entity other) {
         double damage = getAttack() - other.getDefense();
 
         // avoid healing the other entity
@@ -71,13 +76,15 @@ public class Entity {
         }
 
         setActiveCooldown(getCooldown());
-    }
 
-    public void setActiveCooldown(double activeCooldown) {
-        this.activeCooldown = activeCooldown;
+        return damage;
     }
 
     public double getActiveCooldown() {
         return activeCooldown;
+    }
+
+    protected void setActiveCooldown(double activeCooldown) {
+        this.activeCooldown = activeCooldown;
     }
 }
