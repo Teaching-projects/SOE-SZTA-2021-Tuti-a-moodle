@@ -146,7 +146,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test for battle function")
-    void testForBattle1() {
+    public void testForBattle1() {
         // Arrange
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
@@ -163,7 +163,7 @@ public class DummyTest {
     @ParameterizedTest
     @ValueSource(doubles = {90, 50, 70, 80, 40, 45.7, 27.9})
     @DisplayName("Test for battle function 2")
-    void testForBattle2(double health) {
+    public void testForBattle2(double health) {
         // Arrange
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(health, 40, 30, 2, "Mike", "Mike story");
@@ -180,7 +180,7 @@ public class DummyTest {
     @ParameterizedTest
     @ValueSource(doubles = {17, 30, 50, 40, 15, 45.7, 27.9})
     @DisplayName("Test for battle function 2")
-    void testForBattle3(double attack) {
+    public void testForBattle3(double attack) {
         // Arrange
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, attack, 30, 2, "Mike", "Mike story");
@@ -197,7 +197,7 @@ public class DummyTest {
     @ParameterizedTest
     @ValueSource(doubles = {17, 30, 20, 30, 15, 15.7, 27.9})
     @DisplayName("Test for battle function 2")
-    void testForBattle4(double defense) {
+    public void testForBattle4(double defense) {
         // Arrange
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, 40, defense, 2, "Mike", "Mike story");
