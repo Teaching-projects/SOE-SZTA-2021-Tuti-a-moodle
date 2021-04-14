@@ -71,7 +71,7 @@ public class Hero extends Entity {
 
         setCurrentXp(getCurrentXp() + damageDealt);
 
-        if (getCurrentXp() >= getXpPerLevel()) {
+        while (getCurrentXp() >= getXpPerLevel()) {
             levelUp();
         }
 
