@@ -29,11 +29,11 @@ public class Hero extends Entity {
         this.cooldownMultiplierPerLevel=cooldownMultiplierPerLevel;
     }
 
-    public double getcooldownMultiplierPerLevel() {
+    public double getCooldownMultiplierPerLevel() {
         return cooldownMultiplierPerLevel;
     }
 
-    public int gethpIncreasePerLevel() {
+    public int getHpIncreasePerLevel() {
         return hpIncreasePerLevel;
     }
 
@@ -81,9 +81,9 @@ public class Hero extends Entity {
     protected void lvlup(){
         setCurrentLevel(getCurrentLevel()+1);
         setAttack(getAttack()+getDmgIncreasePerLevel());
-        setHealth(getOriginalHealth()+gethpIncreasePerLevel());
+        setHealth(getOriginalHealth()+getHpIncreasePerLevel());
         setCurrentXp(getCurrentXp()-getXpPerLevel());
-        setCooldown(getCooldown()+getcooldownMultiplierPerLevel());
+        setCooldown(getCooldown()+getCooldownMultiplierPerLevel());
     }
 
 }
