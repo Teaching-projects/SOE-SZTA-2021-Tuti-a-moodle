@@ -16,7 +16,7 @@ public class DummyTest {
        
     @Test
     @DisplayName("Test in Entity")
-    void testInConstructor() {
+    public void testInConstructor() {
         // Arrange
         Entity entity;
 
@@ -34,7 +34,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test if health is 0")
-    void testHealthIsZero() {
+    public void testHealthIsZero() {
         // Arrange
         Entity entity;
 
@@ -48,7 +48,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test if entity is dead")
-    void testHealthIsBigger() {
+    public void testHealthIsBigger() {
         // Arrange
         Entity entity;
 
@@ -61,7 +61,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test if entity is alive")
-    void testEntityAlive() {
+    public void testEntityAlive() {
         // Arrange
         Entity entity;
 
@@ -74,7 +74,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test cooldown")
-    void testCooldownBiggerThanZero() {
+    public void testCooldownBiggerThanZero() {
         // Arrange
         Entity entity;
 
@@ -88,7 +88,7 @@ public class DummyTest {
    
     @Test
     @DisplayName("Test attack value")
-    void testAttackBiggerThanZero() {
+    public void testAttackBiggerThanZero() {
         // Arrange
         Entity entity;
 
@@ -102,7 +102,7 @@ public class DummyTest {
     @ParameterizedTest
     @ValueSource(doubles = {17, 30, 50, 40, 15, 45.7, 27.9})
     @DisplayName("Test defense with with ParameterizedTest")
-    void testDefenseBiggerThanZero(double defense) {
+    public void testDefenseBiggerThanZero(double defense) {
         // Arrange
         Entity entity;
 
@@ -117,7 +117,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test attack with attack() function")
-    void testAttackWithAttackFunction() {
+    public void testAttackWithAttackFunction() {
         // Arrange
         Entity entity1;
         Entity entity2;
@@ -137,7 +137,7 @@ public class DummyTest {
 
     @Test
     @DisplayName("Test if health is below 0")
-    void exceptionTestingHealth() {
+    public void exceptionTestingHealth() {
         // Arrange
         Executable executable;
 
