@@ -27,8 +27,7 @@ public class EntityDeserializer extends JsonDeserializer<Entity> {
     }
 
     private boolean isHero(ObjectNode object) {
-        
-        Integer count = Arrays.stream(heroFields).reduce(0, (c, field)->c + (object.has(field)?1:0),(a,b)->a+b) ;
+        var count = Arrays.stream(heroFields).takeWhile(object::has).count();
 
         if(count == 0){
             return false;
