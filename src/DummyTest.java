@@ -73,7 +73,7 @@ public class DummyTest {
     }
 
     @Test
-    @DisplayName("Test if cooldown bigger than 0")
+    @DisplayName("Test cooldown")
     void testCooldownBiggerThanZero() {
         // Arrange
         Entity entity;
@@ -82,12 +82,12 @@ public class DummyTest {
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(entity.getCooldown(), 2, "Wrong cooldown");
+        assertEquals(2, entity.getCooldown(), "Wrong cooldown");
     }
 
    
     @Test
-    @DisplayName("Test if attack bigger than 0")
+    @DisplayName("Test attack value")
     void testAttackBiggerThanZero() {
         // Arrange
         Entity entity;
@@ -96,39 +96,24 @@ public class DummyTest {
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(entity.getAttack(), 50, "Wrong attack");
+        assertEquals(50, entity.getAttack(), "Wrong attack");
     }
 
-    @Test
-    @DisplayName("Test if defense bigger than 0")
-    void testDefenseBiggerThanZero() {
+    @ParameterizedTest
+    @ValueSource(doubles = {17, 30, 50, 40, 15, 45.7, 27.9})
+    @DisplayName("Test defense with with ParameterizedTest")
+    void testDefenseBiggerThanZero(double defense) {
         // Arrange
         Entity entity;
 
         //Act
-        entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
+        entity = new Entity(100, 50, defense, 2, "Bob", "Bob story");
         
         // Assert
-        assertEquals(entity.getDefense() >= 0, true, "Wrong defense");
+        assertEquals(defense, entity.getDefense(), "Wrong health");
     }
 
-    @Test
-    @DisplayName("Test attack")
-    void testAttack() {
-        // Arrange
-        Entity entity1;
-        Entity entity2;
 
-        //Act
-        entity1 = new Entity(100, 50, 40, 2, "Bob", "Bob story");
-        entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
-
-        // Assert
-        assertEquals(entity1.getAttack() - entity2.getDefense(), 20, "Wrong attack");
-
-        assertEquals(entity2.getAttack() - entity1.getDefense(), 0, "Wrong attack");
-       
-    }
 
     @Test
     @DisplayName("Test attack with attack() function")
@@ -143,10 +128,10 @@ public class DummyTest {
 
         // Assert
         entity1.attack(entity2);
-        assertEquals(entity2.getHealth(), 70, "Wrong attack");
+        assertEquals(70, entity2.getHealth(), "Wrong attack");
 
         entity2.attack(entity1);
-        assertEquals(entity1.getHealth(), 95, "Wrong attack");
+        assertEquals(95, entity1.getHealth(), "Wrong attack");
        
     }
 
