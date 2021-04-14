@@ -27,13 +27,11 @@ public class Hero extends Entity {
         this.dmgIncreasePerLevel=dmgIncreasePerLevel;
         this.hpIncreasePerLevel=hpIncreasePerLevel;
         this.cooldownMultiplierPerLevel=cooldownMultiplierPerLevel;
-        
     }
 
     public double getcooldownMultiplierPerLevel() {
         return cooldownMultiplierPerLevel;
     }
-
 
     public int gethpIncreasePerLevel() {
         return hpIncreasePerLevel;
@@ -51,15 +49,15 @@ public class Hero extends Entity {
         return currentXp;
     }
 
-    protected void setCurrent_xp(double currentXp){
+    protected void setCurrentXp(double currentXp){
         this.currentXp=currentXp;
     }
 
-    public int getCurrent_level() {
+    public int getCurrentLevel() {
         return currentLevel;
     }
 
-    protected void setCurrent_level(int currentLevel) {
+    protected void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;
     }
     
@@ -67,7 +65,7 @@ public class Hero extends Entity {
     public double attack(Entity other) {
         var damageDealt = super.attack(other);
 
-        setCurrent_xp(getCurrentXp()+damageDealt);
+        setCurrentXp(getCurrentXp()+damageDealt);
         
         if(getCurrentXp()>=getXpPerLevel()){
             lvlup();
@@ -81,10 +79,10 @@ public class Hero extends Entity {
     }
 
     protected void lvlup(){
-        setCurrent_level(getCurrent_level()+1);
+        setCurrentLevel(getCurrentLevel()+1);
         setAttack(getAttack()+getDmgIncreasePerLevel());
         setHealth(getOriginalHealth()+gethpIncreasePerLevel());
-        setCurrent_xp(getCurrentXp()-getXpPerLevel());
+        setCurrentXp(getCurrentXp()-getXpPerLevel());
         setCooldown(getCooldown()+getcooldownMultiplierPerLevel());
     }
 
