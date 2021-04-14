@@ -119,20 +119,16 @@ public class DummyTest {
     @DisplayName("Test attack with attack() function")
     public void testAttackWithAttackFunction() {
         // Arrange
-        Entity entity1;
-        Entity entity2;
+        Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
+        Entity entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
 
         //Act
-        entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
-        entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
+        entity1.attack(entity2);
+        entity2.attack(entity1);
 
         // Assert
-        entity1.attack(entity2);
         assertEquals(70, entity2.getHealth(), "Wrong attack");
-
-        entity2.attack(entity1);
         assertEquals(95, entity1.getHealth(), "Wrong attack");
-       
     }
 
     @Test
