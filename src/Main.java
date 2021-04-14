@@ -49,7 +49,7 @@ public class Main {
         System.err.println(message);
         System.exit(1);
     }
-    
+
     private static ObjectMapper objectMapper() {
         var objectMapper = new ObjectMapper();
 

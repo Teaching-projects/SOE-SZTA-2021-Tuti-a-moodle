@@ -1,12 +1,12 @@
 public class Entity {
-    private double health;
-    private double attack;
     private final double defense;
-    private double cooldown;
     private final String name;
     private final String lore;
+    private double health;
+    private double attack;
+    private double cooldown;
     private double activeCooldown = 0;
-    
+
     public Entity(
         double health,
         double attack,
@@ -39,6 +39,10 @@ public class Entity {
         return cooldown;
     }
 
+    protected void setCooldown(double cooldown) {
+        this.cooldown = cooldown;
+    }
+
     public double getHealth() {
         return health;
     }
@@ -54,14 +58,15 @@ public class Entity {
     public double getAttack() {
         return attack;
     }
-    protected void setAttack(double attack){
-            this.attack=attack;
+
+    protected void setAttack(double attack) {
+        this.attack = attack;
     }
 
     public double getDefense() {
         return defense;
     }
-    
+
     public double attack(Entity other) {
         double damage = getAttack() - other.getDefense();
 
@@ -75,15 +80,11 @@ public class Entity {
         return damage;
     }
 
-    protected void setActiveCooldown(double activeCooldown) {
-        this.activeCooldown = activeCooldown;
-    }
-
     public double getActiveCooldown() {
         return activeCooldown;
     }
 
-    protected void setCooldown(double cooldown){
-        this.cooldown=cooldown;
+    protected void setActiveCooldown(double activeCooldown) {
+        this.activeCooldown = activeCooldown;
     }
 }

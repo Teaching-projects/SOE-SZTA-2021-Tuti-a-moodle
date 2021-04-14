@@ -1,12 +1,12 @@
 public class Hero extends Entity {
 
-    private int currentLevel = 1;
-    private double currentXp = 0;
     private final double xpPerLevel;
-    private final int dmgIncreasePerLevel;
+    private final int damageIncreasePerLevel;
     private final int hpIncreasePerLevel;
     private final double cooldownMultiplierPerLevel;
     private final double originalHealth = getHealth();
+    private int currentLevel = 1;
+    private double currentXp = 0;
 
     public Hero(
         double health,
@@ -16,15 +16,15 @@ public class Hero extends Entity {
         String name,
         String lore,
         int xpPerLevel,
-        int dmgIncreasePerLevel,
+        int damageIncreasePerLevel,
         int hpIncreasePerLevel,
         double cooldownMultiplierPerLevel
-        ) {
+    ) {
 
         super(health, attack, defense, cooldown, name, lore);
-        
+
         this.xpPerLevel = xpPerLevel;
-        this.dmgIncreasePerLevel = dmgIncreasePerLevel;
+        this.damageIncreasePerLevel = damageIncreasePerLevel;
         this.hpIncreasePerLevel = hpIncreasePerLevel;
         this.cooldownMultiplierPerLevel = cooldownMultiplierPerLevel;
     }
@@ -37,8 +37,8 @@ public class Hero extends Entity {
         return hpIncreasePerLevel;
     }
 
-    public int getDmgIncreasePerLevel() {
-        return dmgIncreasePerLevel;
+    public int getDamageIncreasePerLevel() {
+        return damageIncreasePerLevel;
     }
 
     public double getXpPerLevel() {
@@ -60,30 +60,30 @@ public class Hero extends Entity {
     protected void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;
     }
-    
-    @Override
-    public double attack(Entity other) {
-        var damageDealt = super.attack(other);
-
-        setCurrentXp(getCurrentXp()+damageDealt);
-        
-        if(getCurrentXp() >= getXpPerLevel()) {
-            lvlup();
-        }
-        
-        return damageDealt;
-    }
 
     protected double getOriginalHealth() {
         return originalHealth;
     }
 
-    protected void lvlup() {
-        setCurrentLevel(getCurrentLevel()+1);
-        setAttack(getAttack()+getDmgIncreasePerLevel());
-        setHealth(getOriginalHealth()+getHpIncreasePerLevel());
-        setCurrentXp(getCurrentXp()-getXpPerLevel());
-        setCooldown(getCooldown()+getCooldownMultiplierPerLevel());
+    @Override
+    public double attack(Entity other) {
+        var damageDealt = super.attack(other);
+
+        setCurrentXp(getCurrentXp() + damageDealt);
+
+        if (getCurrentXp() >= getXpPerLevel()) {
+            levelUp();
+        }
+
+        return damageDealt;
+    }
+
+    private void levelUp() {
+        setCurrentLevel(getCurrentLevel() + 1);
+        setAttack(getAttack() + getDamageIncreasePerLevel());
+        setHealth(getOriginalHealth() + getHpIncreasePerLevel());
+        setCurrentXp(getCurrentXp() - getXpPerLevel());
+        setCooldown(getCooldown() + getCooldownMultiplierPerLevel());
     }
 
 }
