@@ -30,7 +30,6 @@ public class BattleTest {
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
 
-        printerSetup();
         Battle battle = new Battle(printer);
 
         // //Act
@@ -48,7 +47,6 @@ public class BattleTest {
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(health, 40, 30, 2, "Mike", "Mike story");
 
-        printerSetup();
         Battle battle = new Battle(printer);
 
         //Act
@@ -66,7 +64,6 @@ public class BattleTest {
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, attack, 30, 2, "Mike", "Mike story");
 
-        printerSetup();
         Battle battle = new Battle(printer);
 
         //Act
@@ -84,7 +81,6 @@ public class BattleTest {
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, 40, defense, 2, "Mike", "Mike story");
 
-        printerSetup();
         Battle battle = new Battle(printer);
 
         //Act
@@ -102,16 +98,15 @@ public class BattleTest {
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, 40, defense, 2, "Mike", "Mike story");
 
-        printerSetup();
         Battle battle = new Battle(printer);
 
         //Act
         battle.battle(entity1, entity2);
 
+        //Assert
         Entity winner = entity1.isAlive() ? entity1 : entity2;
         var result = winner.getName() + " won!";
 
-        // Assert
         assertEquals("Bob won!", result, "Bob needs to win!");
     }
-}
+ }
