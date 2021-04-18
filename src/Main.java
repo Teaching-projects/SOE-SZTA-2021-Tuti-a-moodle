@@ -21,7 +21,7 @@ public class Main {
                 break;
             case 1: {
                 if (args[0].equals("gui")) {
-                    new Gui();
+                    new Gui(new ObjectMapper());
                 } else {
                     bail("Invalid argument");
                 }
