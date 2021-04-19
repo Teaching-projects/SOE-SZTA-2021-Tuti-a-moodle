@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final Entity one;
         final Entity two;
+        final var objectMapper = objectMapper();
         switch (args.length) {
             case 0:
                 try (var reader = new EntityReader()) {
@@ -21,14 +22,13 @@ public class Main {
                 break;
             case 1: {
                 if (args[0].equals("gui")) {
-                    new Gui(new ObjectMapper());
+                    new Gui(objectMapper);
                 } else {
                     bail("Invalid argument");
                 }
                 return;
             }
             case 2: {
-                var objectMapper = objectMapper();
                 one = objectMapper.readValue(new File(args[0]), Entity.class);
                 two = objectMapper.readValue(new File(args[1]), Entity.class);
                 break;
