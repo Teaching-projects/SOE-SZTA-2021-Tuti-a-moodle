@@ -24,18 +24,18 @@ jobs:
       shell: bash
       env: { APP: app/build/install/app/bin/app }
       run: |
-        for test in "$(ls test/*.txt)"; do
-          $APP < $test > $test.generated
-          diff $test.generated $test.txt.out
+        for test in $(ls test/*.txt); do
+          "$APP" < "$test" > "${test}.generated"
+          diff "${test}.generated" "${test}.out"
         done
 
-        $APP test/test8.json test/test9.json > test/test8.generated
+        "$APP" test/test8.json test/test9.json > test/test8.generated
         diff test/test8.generated test/test8.txt.out
 
-        ! $APP test/test8.json
+        ! "$APP" test/test8.json
 
-        $APP test/test8.json test/test9.json > test/test10.generated
+        "$APP" test/test8.json test/test9.json > test/test10.generated
         diff test/test10.generated test/test10.txt.out
 
-        $APP test/test9.json test/test10.json > test/test11.generated
+        "$APP" test/test9.json test/test10.json > test/test11.generated
         diff test/test11.generated test/test11.txt.out
