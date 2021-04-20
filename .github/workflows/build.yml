@@ -14,11 +14,9 @@ jobs:
         distribution: "adopt"
         java-version: "11"
 
-    - name: Check
-      run: ./gradlew check
-
-    - name: Install
-      run: ./gradlew installDist
+    - name: Gradle
+      uses: burrunan/gradle-cache-action@v1
+      with: { arguments: check installDist }
 
     - name: CLI tests
       shell: bash
