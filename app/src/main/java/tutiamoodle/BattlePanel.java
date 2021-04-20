@@ -1,13 +1,13 @@
 package tutiamoodle;
 
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.io.PrintStream;
-
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class BattlePanel extends JPanel implements ActionListener {
 
@@ -55,7 +55,7 @@ public class BattlePanel extends JPanel implements ActionListener {
 
         var printer = new PrintStream(new TextAreaOutputStream(textArea));
         var battleResult = new Battle(printer).battle(one.getEntity(), two.getEntity());
-        if (!battleResult.isUnbalanced()) {
+        if (battleResult.isBalanced()) {
             var winner = battleResult.getWinner();
             if (one.getEntity().equals(winner)) {
                 popupOutcome(winner.getName() + " won!");

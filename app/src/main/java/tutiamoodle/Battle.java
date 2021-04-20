@@ -11,11 +11,11 @@ public class Battle {
 
     public BattleResult battle(Entity player1, Entity player2) {
 
-        printSeparator('=', 20);
+        printSeparator();
         printEntity(player1);
         printEntity(player2);
 
-        printSeparator('=', 20);
+        printSeparator();
 
         var preTestResult = preTest(player1, player2);
         if (preTestResult != null) {
@@ -38,9 +38,9 @@ public class Battle {
             if (player2.getActiveCooldown() == 0) {
                 player2.attack(player1);
             }
-        } while(player1.isAlive() && player2.isAlive());
+        } while (player1.isAlive() && player2.isAlive());
 
-        printSeparator('=', 20);
+        printSeparator();
         printMessage("The Battle is over.");
 
         if (!player1.isAlive() && !player2.isAlive()) {
@@ -66,27 +66,15 @@ public class Battle {
 
     private void printEntity(Entity entity) {
         printer.println(entity.getName() + " - HP: " + entity.getHealth() + ", DMG: " + entity.getAttack()
-                + ", DEF: " + entity.getDefense());
+            + ", DEF: " + entity.getDefense());
     }
 
-    private void printEntityHP(Entity entity) {
-        printer.println(entity.getName() + " - HP: " + entity.getHealth());
-    }
-
-    private void printSeparator(char character, int length) {
-        for (int i = 0; i < length; i++) {
-            printer.print(character);
-        }
-        printer.println();
+    private void printSeparator() {
+        printer.println("=".repeat(20));
     }
 
     private void printMessage(String message) {
         printer.println(message);
-    }
-
-    private void healthCheck(Entity player1, Entity player2) {
-        printEntityHP(player1);
-        printEntityHP(player2);
     }
 
     public static class BattleResult {
@@ -98,8 +86,8 @@ public class Battle {
             this.winner = winner;
         }
 
-        public boolean isUnbalanced() {
-            return unbalanced;
+        public boolean isBalanced() {
+            return !unbalanced;
         }
 
         public Entity getWinner() {

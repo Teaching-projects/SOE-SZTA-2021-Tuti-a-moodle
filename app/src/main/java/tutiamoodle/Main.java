@@ -1,11 +1,11 @@
 package tutiamoodle;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.NoSuchElementException;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -42,7 +42,7 @@ public class Main {
 
         var printer = System.out;
         var battleResult = new Battle(printer).battle(one, two);
-        if (!battleResult.isUnbalanced()) {
+        if (battleResult.isBalanced()) {
             return;
         }
 

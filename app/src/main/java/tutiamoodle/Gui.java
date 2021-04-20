@@ -1,18 +1,17 @@
 package tutiamoodle;
 
-import javax.swing.*;
-import java.awt.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.awt.*;
+import javax.swing.*;
+
 class Gui extends JFrame {
-    private final EntityPanel one;
-    private final EntityPanel two;
 
     public Gui(ObjectMapper objectMapper) {
         setLayout(new BorderLayout());
 
-        one = new EntityPanel(objectMapper);
-        two = new EntityPanel(objectMapper);
+        final var one = new EntityPanel(objectMapper);
+        final var two = new EntityPanel(objectMapper);
         Container contentPane = getContentPane();
         contentPane.add(one, BorderLayout.LINE_START);
         contentPane.add(new BattlePanel(one, two), BorderLayout.CENTER);

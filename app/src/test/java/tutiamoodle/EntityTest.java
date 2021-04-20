@@ -1,11 +1,10 @@
 package tutiamoodle;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +15,7 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
 
         // Assert
@@ -34,9 +33,9 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(0, 50, 40, 2, "Bob", "Bob story");
-        
+
         // Assert
         assertEquals(0, entity.getHealth(), "Wrong health");
     }
@@ -47,9 +46,9 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(0, 20, 60, 2, "Bob", "Bob story");
-        
+
         // Assert
         assertFalse(entity.isAlive(), "Wrong health");
     }
@@ -60,9 +59,9 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(5, 50, 40, 2, "Bob", "Bob story");
-        
+
         // Assert
         assertTrue(entity.isAlive(), "Wrong health");
     }
@@ -73,9 +72,9 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
-        
+
         // Assert
         assertEquals(2, entity.getCooldown(), "Wrong cooldown");
     }
@@ -86,9 +85,9 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(100, 50, 40, 2, "Bob", "Bob story");
-        
+
         // Assert
         assertEquals(50, entity.getAttack(), "Wrong attack");
     }
@@ -100,9 +99,9 @@ public class EntityTest {
         // Arrange
         Entity entity;
 
-        //Act
+        // Act
         entity = new Entity(100, 50, defense, 2, "Bob", "Bob story");
-        
+
         // Assert
         assertEquals(defense, entity.getDefense(), "Wrong health");
     }
@@ -114,7 +113,7 @@ public class EntityTest {
         Entity entity1 = new Entity(100, 50, 35, 2, "Bob", "Bob story");
         Entity entity2 = new Entity(90, 40, 30, 2, "Mike", "Mike story");
 
-        //Act
+        // Act
         entity1.attack(entity2);
         entity2.attack(entity1);
 
@@ -129,7 +128,7 @@ public class EntityTest {
         // Arrange
         Executable executable;
 
-        //Act
+        // Act
         executable = () -> new Entity(-1, 50, 40, 2, "Bob", "Bob story");
 
         // Assert

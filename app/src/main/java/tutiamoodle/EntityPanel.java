@@ -1,16 +1,19 @@
 package tutiamoodle;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
-import javax.swing.filechooser.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 public class EntityPanel extends JPanel implements ActionListener {
     private final JButton openButton;
-    private JTextArea textArea;
     private final JFileChooser jfc;
+    private final JTextArea textArea;
     private Entity entity;
     private final ObjectMapper objectMapper;
 
@@ -22,7 +25,6 @@ public class EntityPanel extends JPanel implements ActionListener {
         textArea = new JTextArea(5, 20);
         textArea.setMargin(new Insets(5, 5, 5, 5));
         textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
 
         jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Select an entity");
@@ -37,7 +39,7 @@ public class EntityPanel extends JPanel implements ActionListener {
         buttonPanel.add(openButton);
 
         add(buttonPanel, BorderLayout.PAGE_START);
-        add(scrollPane, BorderLayout.CENTER);
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
     }
 
     @Override
