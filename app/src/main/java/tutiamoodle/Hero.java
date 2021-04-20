@@ -1,3 +1,5 @@
+package tutiamoodle;
+
 public class Hero extends Entity {
 
     private final double xpPerLevel;

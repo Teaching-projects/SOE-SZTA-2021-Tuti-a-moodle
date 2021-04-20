@@ -1,3 +1,5 @@
+package tutiamoodle;
+
 import javax.swing.*;
 import java.awt.*;
 import com.fasterxml.jackson.databind.ObjectMapper;

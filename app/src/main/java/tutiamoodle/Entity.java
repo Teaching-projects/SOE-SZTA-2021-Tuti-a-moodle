@@ -1,3 +1,5 @@
+package tutiamoodle;
+
 public class Entity {
     private final double defense;
     private final String name;

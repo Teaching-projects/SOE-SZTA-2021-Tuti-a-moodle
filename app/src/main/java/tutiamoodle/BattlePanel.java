@@ -1,8 +1,10 @@
+package tutiamoodle;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
@@ -22,7 +24,7 @@ public class BattlePanel extends JPanel implements ActionListener {
         textArea.setEditable(false);
 
         try {
-            BufferedImage myPicture = ImageIO.read(new File("./img/vs.png"));
+            BufferedImage myPicture = ImageIO.read(readVersusImage());
             Image scaledImage = myPicture.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
             add(new JLabel(new ImageIcon(scaledImage)), BorderLayout.PAGE_START);
         } catch (Exception e) {
@@ -91,6 +93,10 @@ public class BattlePanel extends JPanel implements ActionListener {
             two.refreshTextArea();
             one.clearPanel();
         }
+    }
+
+    private InputStream readVersusImage() {
+        return getClass().getResourceAsStream("img/vs.png");
     }
 
     private void popupOutcome(String message) {

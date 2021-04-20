@@ -1,3 +1,5 @@
+package tutiamoodle;
+
 import java.io.PrintStream;
 
 public class Battle {
