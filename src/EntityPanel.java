@@ -10,9 +10,12 @@ public class EntityPanel extends JPanel implements ActionListener {
     private JTextArea textArea;
     private final JFileChooser jfc;
     private Entity entity;
+    private final ObjectMapper objectMapper;
 
-    public EntityPanel() {
+    public EntityPanel(ObjectMapper objectMapper) {
         super(new BorderLayout());
+
+        this.objectMapper = objectMapper;
 
         textArea = new JTextArea(5, 20);
         textArea.setMargin(new Insets(5, 5, 5, 5));
@@ -41,7 +44,6 @@ public class EntityPanel extends JPanel implements ActionListener {
             int returnValue = jfc.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 try {
-                    var objectMapper = new ObjectMapper();
                     entity = objectMapper.readValue(new File(jfc.getSelectedFile().getAbsolutePath()), Entity.class);
                     refreshTextArea();
                 } catch (Exception ex) {
