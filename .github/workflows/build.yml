@@ -1,53 +1,33 @@
+name: Continuous Integration
+
 on: push
+
 jobs:
-  Build_Project:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - run: pwsh ./get-dependencies.ps1
-      - run: pwsh ./build.ps1
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.sha }}
-          path: |
-            build/*.class
-            dependencies/*.jar
-  Run_Basic_IO_Tests:
-    needs: Build_Project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: ${{ github.sha }}
-          path: '.'
-      - run: |
-          for test in `ls tests/*.txt`; do
-            psw ./run.ps1 < $test > $test.generated
-            diff $test.generated $test.out
-          done
-      - run: pwsh ./run.ps1 test/test8.json test/test9.json > test/test8.generated.txt
-      - run: diff test/test8.generated.txt test/test8.txt.out
-      - run: '! pwsh ./run.ps1 test/test8.json'
-      - run: pwsh ./run.ps1 test/test9.json test/test9.json > test/test10.generated.txt
-      - run: diff test/test10.generated.txt test/test10.txt.out
-      - run: pwsh ./run.ps1 test/test9.json test/test10.json > test/test11.generated.txt
-      - run: diff test/test11.generated.txt test/test11.txt.out
-  junit:
-    needs: Build_Project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: ${{ github.sha }}
-          path: '.'
-      - run: pwsh test.ps1
-  cleanup:
-    if: always()
-    needs: [Build_Project, Run_Basic_IO_Tests, junit]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: geekyeggo/delete-artifact@v1
-        with:
-          name: ${{ github.sha }}
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-java@v2
+      with:
+        distribution: "adopt"
+        java-version: "11"
+
+    - name: Gradle
+      uses: burrunan/gradle-cache-action@v1
+      with: { arguments: check installDist }
+
+    - name: CLI tests
+      shell: bash
+      env: { APP: app/build/install/app/bin/app }
+      run: |
+        "$APP" < test/test1.txt | grep -qEe '^A won!'
+        "$APP" < test/test2.txt | grep -qEe '^There wouldn'
+        "$APP" < test/test3.txt | grep -qEe '^Unbalanced combat! B won!'
+        "$APP" < test/test4.txt | grep -qEe '^There wouldn'
+        "$APP" < test/test5.txt | grep -qEe '^Both heroes are dead!'
+        "$APP" test/test8.json test/test9.json | grep -qEe '^Bob won!'
+        ! "$APP" test/test8.json
+        "$APP" test/test9.json test/test9.json | grep -qEe '^Bob won!'
+        "$APP" test/test9.json test/test10.json | grep -qEe '^Max won!'
