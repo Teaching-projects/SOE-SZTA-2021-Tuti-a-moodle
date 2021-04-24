@@ -96,7 +96,7 @@ public class BattlePanel extends JPanel implements ActionListener {
     }
 
     private InputStream readVersusImage() {
-        return getClass().getResourceAsStream("img/vs.png");
+        return getClass().getClassLoader().getResourceAsStream("img/vs.png");
     }
 
     private void popupOutcome(String message) {
