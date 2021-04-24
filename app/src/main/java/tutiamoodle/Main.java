@@ -25,6 +25,8 @@ public class Main {
             case 1: {
                 if (args[0].equals("gui")) {
                     new Gui(objectMapper);
+                } else if (args[0].equals("adventure")) {
+                    new Adventure(objectMapper);
                 } else {
                     bail("Invalid argument");
                 }
