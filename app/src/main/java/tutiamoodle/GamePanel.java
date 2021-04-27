@@ -1,17 +1,23 @@
 package tutiamoodle;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class GamePanel extends JPanel implements ActionListener {
     private final Hero player;
     private final Entity entity;
     private final JTextArea textArea;
-    private final JLabel hpValueLabel, lvlValueLabel, atkValueLabel, xpValueLabel;
-    private final JButton choice1, choice2, choice3, choice4;
+    private final JLabel hpValueLabel;
+    private final JLabel lvlValueLabel;
+    private final JLabel atkValueLabel;
+    private final JLabel xpValueLabel;
+    private final JButton choice1;
+    private final JButton choice2;
+    private final JButton choice3;
+    private final JButton choice4;
 
     public GamePanel(Hero player, Entity entity) {
         setLayout(new BorderLayout());
@@ -20,18 +26,17 @@ public class GamePanel extends JPanel implements ActionListener {
         this.player = player;
         this.entity = entity;
 
-        Font boldFont = new Font("Courier New", Font.BOLD, 30);
-        Font normalFont = new Font("Courier New", Font.PLAIN, 30);
-
         JPanel playerPanel = new JPanel();
         playerPanel.setBackground(Color.DARK_GRAY);
         playerPanel.setLayout(new FlowLayout());
         JLabel lvlLabel = new JLabel("LVL:");
         lvlLabel.setForeground(Color.WHITE);
+        Font boldFont = new Font("Courier New", Font.BOLD, 30);
         lvlLabel.setFont(boldFont);
         playerPanel.add(lvlLabel);
         lvlValueLabel = new JLabel(String.valueOf(player.getCurrentLevel()));
         lvlValueLabel.setForeground(Color.WHITE);
+        Font normalFont = new Font("Courier New", Font.PLAIN, 30);
         lvlValueLabel.setFont(normalFont);
         playerPanel.add(lvlValueLabel);
         JLabel hpLabel = new JLabel("HP:");
@@ -61,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener {
         add(playerPanel, BorderLayout.PAGE_START);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(2,1));
+        mainPanel.setLayout(new GridLayout(2, 1));
         JLabel mapLabel = new JLabel("MAP");
         mainPanel.add(mapLabel);
         textArea = new JTextArea(10, 30);
@@ -91,16 +96,16 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == choice1) {
-
+            // FIXME
         }
         if (e.getSource() == choice2) {
-
+            // FIXME
         }
         if (e.getSource() == choice3) {
-
+            // FIXME
         }
         if (e.getSource() == choice4) {
-
+            // FIXME
         }
     }
 }

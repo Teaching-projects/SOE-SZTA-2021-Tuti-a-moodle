@@ -64,7 +64,7 @@ public class Adventure extends JFrame implements ActionListener {
             try {
                 Entity heroEntity = objectMapper.readValue(heroSelectorPanel.getFile(), Entity.class);
                 Entity enemyEntity = objectMapper.readValue(enemySelectorPanel.getFile(), Entity.class);
-                contentPane.add(new GamePanel((Hero)heroEntity, enemyEntity));
+                contentPane.add(new GamePanel((Hero) heroEntity, enemyEntity));
                 mainPanel.setVisible(false);
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, exception.getStackTrace(), "Error", JOptionPane.ERROR_MESSAGE);
