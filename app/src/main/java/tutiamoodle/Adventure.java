@@ -14,6 +14,8 @@ public class Adventure extends JFrame implements ActionListener {
     private final SelectorPanel heroSelectorPanel;
     private final SelectorPanel mapSelectorPanel;
     private final SelectorPanel enemySelectorPanel;
+    private final Container contentPane;
+    private final JPanel mainPanel;
 
     public Adventure(ObjectMapper objectMapper) {
         super("Fapados RPG");
@@ -23,10 +25,10 @@ public class Adventure extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(boxlayout);
-        panel.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
+        mainPanel = new JPanel();
+        BoxLayout boxlayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
+        mainPanel.setLayout(boxlayout);
+        mainPanel.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
 
         JPanel titleNamePanel = new JPanel();
         Font titleFont = new Font("Courier New", Font.BOLD, 80);
@@ -41,14 +43,17 @@ public class Adventure extends JFrame implements ActionListener {
 
         JPanel startButtonPanel = new JPanel();
         startButton = new JButton("START");
+        startButton.addActionListener(this);
         startButtonPanel.add(startButton);
 
-        panel.add(titleNamePanel);
-        panel.add(heroSelectorPanel);
-        panel.add(mapSelectorPanel);
-        panel.add(enemySelectorPanel);
-        panel.add(startButtonPanel);
-        add(panel);
+        mainPanel.add(titleNamePanel);
+        mainPanel.add(heroSelectorPanel);
+        mainPanel.add(mapSelectorPanel);
+        mainPanel.add(enemySelectorPanel);
+        mainPanel.add(startButtonPanel);
+
+        contentPane = getContentPane();
+        contentPane.add(mainPanel);
 
         setVisible(true);
     }
@@ -56,7 +61,14 @@ public class Adventure extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {
-
+            try {
+                Entity heroEntity = objectMapper.readValue(heroSelectorPanel.getFile(), Entity.class);
+                Entity enemyEntity = objectMapper.readValue(enemySelectorPanel.getFile(), Entity.class);
+                contentPane.add(new GamePanel((Hero)heroEntity, enemyEntity));
+                mainPanel.setVisible(false);
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, exception.getStackTrace(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
