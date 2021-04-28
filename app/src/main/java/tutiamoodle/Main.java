@@ -67,6 +67,7 @@ public class Main {
 
         var deserialization = new SimpleModule();
         deserialization.addDeserializer(Entity.class, new EntityDeserializer());
+        deserialization.addDeserializer(MapCell.class, new MapCellDeserializer());
         objectMapper.registerModule(deserialization);
 
         return objectMapper;
