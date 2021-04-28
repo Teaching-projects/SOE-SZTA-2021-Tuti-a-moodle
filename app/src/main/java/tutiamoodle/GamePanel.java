@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 public class GamePanel extends JPanel implements ActionListener {
     private final Hero player;
     private final Entity entity;
+    private final MapCell[] map;
     private final JTextArea textArea;
     private final JLabel hpValueLabel;
     private final JLabel lvlValueLabel;
@@ -19,12 +20,13 @@ public class GamePanel extends JPanel implements ActionListener {
     private final JButton choice3;
     private final JButton choice4;
 
-    public GamePanel(Hero player, Entity entity) {
+    public GamePanel(Hero player, Entity entity, MapCell[] map) {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
 
         this.player = player;
         this.entity = entity;
+        this.map = map;
 
         JPanel playerPanel = new JPanel();
         playerPanel.setBackground(Color.DARK_GRAY);
