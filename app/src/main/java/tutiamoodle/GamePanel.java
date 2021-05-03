@@ -3,6 +3,9 @@ package tutiamoodle;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -19,6 +22,10 @@ public class GamePanel extends JPanel implements ActionListener {
     private final JButton choice2;
     private final JButton choice3;
     private final JButton choice4;
+    private final GridPanel gridPanel;
+    private ImageIcon imageIcon;
+    private int row;
+    private int col;
 
     public GamePanel(Hero player, Entity entity, MapCell[] map) {
         setLayout(new BorderLayout());
@@ -27,6 +34,12 @@ public class GamePanel extends JPanel implements ActionListener {
         this.player = player;
         this.entity = entity;
         this.map = map;
+
+        laodImage();
+
+        gridPanel = new GridPanel();
+        col = 2;
+        row = 2;
 
         JPanel playerPanel = new JPanel();
         playerPanel.setBackground(Color.DARK_GRAY);
@@ -69,8 +82,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2, 1));
-        JLabel mapLabel = new JLabel("MAP");
-        mainPanel.add(mapLabel);
+        mainPanel.add(map());
         textArea = new JTextArea(10, 30);
         textArea.append("Your adventure has started!");
         textArea.setEditable(false);
@@ -93,21 +105,98 @@ public class GamePanel extends JPanel implements ActionListener {
         choice4.addActionListener(this);
         buttonPanel.add(choice4);
         add(buttonPanel, BorderLayout.PAGE_END);
+
+        gridPanel.getRoomPanel(row, col).setImage(true);
+    }
+
+    private JPanel map() {
+        for (MapCell mc: map) {
+            if (mc.getType() == MapCell.Type.MONSTER) {
+                try {
+                    Entity e = (Entity) entity.clone();
+                    gridPanel.addRoomPanel(new RoomPanel(mc, e, new JLabel(imageIcon)));
+                } catch (CloneNotSupportedException cloneNotSupportedException) {
+                    cloneNotSupportedException.printStackTrace();
+                }
+            } else {
+                gridPanel.addRoomPanel(new RoomPanel(mc, null, new JLabel(imageIcon)));
+            }
+        }
+        return gridPanel.createGridPanel();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == choice1) {
-            // FIXME
+            moveUP(row, col);
         }
         if (e.getSource() == choice2) {
-            // FIXME
+            moveDown(row, col);
         }
         if (e.getSource() == choice3) {
-            // FIXME
+            moveRight(row, col);
         }
         if (e.getSource() == choice4) {
-            // FIXME
+            moveLeft(row, col);
         }
     }
+
+    private void moveRight(int row, int col) {
+        RoomPanel rp = gridPanel.getRoomPanel(row, col);
+        if (rp.getBorderEast() == 0) {
+            col++;
+            rp.setImage(false);
+            gridPanel.getRoomPanel(row, col).setImage(true);
+        }
+        revalidate();
+        repaint();
+    }
+
+    private void moveDown(int row, int col) {
+        RoomPanel rp = gridPanel.getRoomPanel(row, col);
+        if (rp.getBorderSouth() == 0) {
+            row++;
+            rp.setImage(false);
+            gridPanel.getRoomPanel(row, col).setImage(true);
+        }
+        revalidate();
+        repaint();
+    }
+
+    private void moveLeft(int row, int col) {
+        RoomPanel rp = gridPanel.getRoomPanel(row, col);
+        if (rp.getBorderWest() == 0) {
+            col--;
+            rp.setImage(false);
+            gridPanel.getRoomPanel(row, col).setImage(true);
+        }
+        revalidate();
+        repaint();
+    }
+
+    private void moveUP(int row, int col) {
+        if (gridPanel.getRoomPanel(row, col).getBorderNorth() == 0) {
+            row--;
+            gridPanel.getRoomPanel(row, col).setImage(false);
+            gridPanel.getRoomPanel(row, col).setImage(true);
+        }
+        revalidate();
+        repaint();
+    }
+
+    public void laodImage() {
+        try {
+            BufferedImage myPicture = ImageIO.read(readImage());
+            Image scaledImage = myPicture.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(scaledImage);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Oops, something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+    }
+
+    private InputStream readImage() {
+        return getClass().getClassLoader().getResourceAsStream("img/vs.png");
+    }
+
 }
