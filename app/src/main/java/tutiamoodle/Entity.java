@@ -1,6 +1,8 @@
 package tutiamoodle;
 
-public class Entity {
+import java.lang.Cloneable;
+
+public class Entity implements Cloneable {
     private final double defense;
     private final String name;
     private final String lore;
@@ -88,5 +90,10 @@ public class Entity {
 
     protected void setActiveCooldown(double activeCooldown) {
         this.activeCooldown = activeCooldown;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
